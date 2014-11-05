@@ -1,6 +1,6 @@
 import java.sql.SQLException;
 
-import model.QOTD.QOTDModel;
+import quote.Quotes;
 import model.calendar.Event;
 import model.note.Note;
 import JsonClasses.AuthUser;
@@ -22,7 +22,7 @@ public class GiantSwitch {
 
 		Note noteKlasse = new Note();
 		//ForecastModel forecastKlasse = new ForecastModel();
-		QOTDModel QOTDKlasse = new QOTDModel();
+		Quotes QOTDKlasse = new Quotes();
 		SwitchMethods SW = new SwitchMethods();
 		
 		Gson gson = new GsonBuilder().create();
