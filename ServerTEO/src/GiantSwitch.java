@@ -5,8 +5,8 @@ import model.calendar.Event;
 import model.note.Note;
 import JsonClasses.AuthUser;
 import JsonClasses.CalendarInfo;
-import JsonClasses.CreateCalender;
-import JsonClasses.DeleteCalender;
+import JsonClasses.Createcalendar;
+import JsonClasses.Deletecalendar;
 
 import com.google.gson.*;
 
@@ -57,25 +57,25 @@ public class GiantSwitch {
 		/*************
 		 ** CALENDAR **
 		 *************/
-		case "createCalender":
-			CreateCalender CC = (CreateCalender)gson.fromJson(jsonString, CreateCalender.class);
-			System.out.println(CC.getCalenderName()+ "Den har lagt det nye ind i klassen");
-			answer = SW.createNewCalender(CC.getUserName(), CC.getCalenderName(), CC.getPublicOrPrivate());
+		case "createcalendar":
+			CreateCalendar CC = (CreateCalendar)gson.fromJson(jsonString, CreateCalendar.class);
+			System.out.println(CC.getcalendarName()+ "Den har lagt det nye ind i klassen");
+			answer = SW.createNewcalendar(CC.getUserName(), CC.getcalendarName(), CC.getPublicOrPrivate());
 			break;
 		
-		case "deleteCalender":
-			DeleteCalender DC = (DeleteCalender)gson.fromJson(jsonString, DeleteCalender.class);
-			System.out.println(DC.getCalenderName()+ "Den har lagt det nye ind i klassen");
-			answer = SW.deleteCalender(DC.getUserName(), DC.getCalenderName());
+		case "deletecalendar":
+			DeleteCalendar DC = (DeleteCalendar)gson.fromJson(jsonString, DeleteCalendar.class);
+			System.out.println(DC.getcalendarName()+ "Den har lagt det nye ind i klassen");
+			answer = SW.deletecalendar(DC.getUserName(), DC.getcalendarName());
 			break;
 		
-		case "saveImportedCalender":
+		case "saveImportedcalendar":
 			
 			
 			break;
 			
-		case "getCalender":
-			System.out.println("Recieved getCalender");
+		case "getcalendar":
+			System.out.println("Recieved getcalendar");
 			break;
 
 		case "getEvents":
@@ -145,12 +145,12 @@ public class GiantSwitch {
 			return "getNote";
 		} else if (ID.contains("deleteNote")){
 			return "deleteNote";
-		}else if  (ID.contains("deleteCalender")){
-			return "deleteCalender";
+		}else if  (ID.contains("deletecalendar")){
+			return "deletecalendar";
 		} else if (ID.contains("getClientForecast")) {
 			return "getClientForecast";
-		} else if (ID.contains("saveImportedCalender")) {
-			return "saveImportedCalender";
+		} else if (ID.contains("saveImportedcalendar")) {
+			return "saveImportedcalendar";
 		}else if (ID.contains("importCourse")) {
 			return "importCourse";
 		} else if (ID.contains("exportCourse")) {
@@ -161,14 +161,14 @@ public class GiantSwitch {
 			return "logIn";
 		} else if (ID.contains("logOut")) {
 			return "logOut";
-		} else if (ID.contains("getCalender")) {
-			return "getCalender";
+		} else if (ID.contains("getcalendar")) {
+			return "getcalendar";
 		} else if (ID.contains("createEvent")) {
 			return "createEvent";
 		} else if (ID.contains("deleteEvent")) {
 			return "deleteEvent"; 
-		} else if (ID.contains("createCalender")) {
-			return "createCalender";
+		} else if (ID.contains("createcalendar")) {
+			return "createcalendar";
 		}
 
 		else

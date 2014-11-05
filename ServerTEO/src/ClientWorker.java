@@ -7,7 +7,8 @@ import java.net.Socket;
 public class ClientWorker implements  Runnable{
 	private Socket connectionSocketConected;
 	private Encryption encryption = new Encryption();
-	private String incomingJson;
+	private String incommingJson;
+	private GiantSwitch GS = new GiantSwitch();
 	
 	ClientWorker(Socket connectionSocket){
 		this.connectionSocketConected = connectionSocket;
@@ -24,12 +25,12 @@ public class ClientWorker implements  Runnable{
 			//Sets client sentence equals input from client
 			//incomingJson = inFromClient.readLine();			
 			
-			String ny = encryption.decrypt(incommingByteArray);
+			incommingJson = encryption.decrypt(incommingByteArray);
 			
 			
 			System.out.println("Besked modtaget!");
-			System.out.println("Received: " + ny);
-			String returnAnswer = GS.GiantSwitchMethod(ny);
+			System.out.println("Received: " + incommingJson);
+			String returnAnswer = GS.GiantSwitchMethod(incommingJson);
 			byte[] returnAnswerCrypted = encryption.encrypt(returnAnswer);
 //			//Sends the capitalized message back to client!!
 			outToClient.writeBytes(returnAnswerCrypted + "\n");
