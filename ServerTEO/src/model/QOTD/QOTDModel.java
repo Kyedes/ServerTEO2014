@@ -5,16 +5,10 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
-
-
-
-
-
+//import java.util.ArrayList;
 import java.util.Date;
 
-import model.Forecast.Forecast;
+//import model.Forecast.Forecast;
 import model.QueryBuild.QueryBuilder;
 
 import org.json.simple.JSONObject;
@@ -22,9 +16,9 @@ import org.json.simple.parser.JSONParser;
 
 public class QOTDModel {
 
-	private ArrayList<QOTD> qotdlist = new ArrayList<>();
+//	private ArrayList<QOTD> qotdlist = new ArrayList<>();
 	
-	QOTD qotdlist2 = new QOTD(null, null, null);
+//	QOTD qotdlist2 = new QOTD(null, null, null);
     QueryBuilder qb = new QueryBuilder();
     
     private ResultSet resultSet;
@@ -66,8 +60,8 @@ public class QOTDModel {
     			JSONObject jsonObject = (JSONObject) jsonParser.parse(json);
     			
     			String quote = (String) jsonObject.get("quote");
-    			String author = (String) jsonObject.get("author");
-    			String topic = (String) jsonObject.get("topic");
+//    			String author = (String) jsonObject.get("author");
+//    			String topic = (String) jsonObject.get("topic");
 
     			
     			String[] keys = {"qotd"};
@@ -112,13 +106,13 @@ public class QOTDModel {
 	     	long date1 = date.getTime();
 	     	long date2 = date.getTime() - maxTimeNoUpdate; // minus 1 hour -- should be fetched from database
 	     	
-	     	long timeSinceUpdate = date1 - date2; 
+	     	long timeSinceUpdate = date1 - date2;
 	     	
 	     	
 	     	// if more than 1 hour ago, do update
 	     	if(timeSinceUpdate > 864000){
 	     		// return fresh weather data
-	     		saveQuote();	
+	     		saveQuote();
 	     	} 
 	     }
   	
