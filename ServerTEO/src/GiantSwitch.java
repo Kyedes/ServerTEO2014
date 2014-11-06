@@ -2,15 +2,15 @@ import java.sql.SQLException;
 
 import quote.Quotes;
 import model.calendar.Event;
-import model.note.Note;
-import JsonClasses.AuthUser;
-import JsonClasses.CalendarInfo;
-import JsonClasses.Createcalendar;
-import JsonClasses.Deletecalendar;
+//import model.note.Note;
+//import JsonClasses.AuthUser;
+//import JsonClasses.CalendarInfo;
+//import JsonClasses.Createcalendar;
+//import JsonClasses.Deletecalendar;
 
 import com.google.gson.*;
 
-import databaseMethods.SwitchMethods;
+//import databaseMethods.SwitchMethods;
 
 public class GiantSwitch {
 	
@@ -20,10 +20,10 @@ public class GiantSwitch {
 
 		//Events eventsKlasse = new Events(0, 0, 0, jsonString, jsonString, jsonString, jsonString, jsonString);
 
-		Note noteKlasse = new Note();
+//		Note noteKlasse = new Note();
 		//ForecastModel forecastKlasse = new ForecastModel();
-		Quotes QOTDKlasse = new Quotes();
-		SwitchMethods SW = new SwitchMethods();
+//		Quotes QOTDKlasse = new Quotes();
+//		SwitchMethods SW = new SwitchMethods();
 		
 		Gson gson = new GsonBuilder().create();
 		String answer = "";	
