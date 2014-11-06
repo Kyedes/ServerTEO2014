@@ -36,10 +36,10 @@ public class GiantSwitch {
 		 ** COURSES **
 		 ************/
 
-		case "importCalendar":
-			System.out.println("Recieved importCourse");
-			//skal laves
-			break;
+//		case "importCalendar":
+//			System.out.println("Recieved importCourse");
+//			//skal laves
+//			break;
 
 		/**********
 		 ** LOGIN **
@@ -75,22 +75,29 @@ public class GiantSwitch {
 			break;
 			
 		case "getcalendar":
+			GetCalendarObject gcObject = gson.fromJson(jsonString, GetCalendarObject.class);
+			GetCalendar getCalendar = new GetCalendar();
+			answer = getCalendar.execute(gcObject);
+			
 			System.out.println("Recieved getcalendar");
 			break;
 
-		case "getEvents":
-			System.out.println("Recieved getEvents");
-			break;
+//		case "getEvents":
+//			System.out.println("Recieved getEvents");
+//			break;
 
 		case "createEvent":
 			System.out.println("Recieved saveEvent");
 			break;
 
-		case "getEventInfo":
-			System.out.println("Recieved getEventInfo");
-			break;
+//		case "getEventInfo":
+//			System.out.println("Recieved getEventInfo");
+//			break;
 			
 		case "deleteEvent":
+			DeleteEventObject deleteEO = gson.fromJson(jsonString, DeleteEventObject.class);
+			DeleteEvent deleteE = new DeleteEvent();
+			deleteE.execute(deleteEO);
 			System.out.println("Recieved deleteEvent");
 		
 		case "saveNote":
