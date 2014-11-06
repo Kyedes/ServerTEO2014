@@ -1,5 +1,11 @@
 
 public class GetCalendarObject implements java.io.Serializable {
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1067887168456410585L;
 	private String overallID = "getCalendar";
 	private String userID;
 	
