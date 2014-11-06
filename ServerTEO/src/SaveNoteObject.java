@@ -1,6 +1,7 @@
 
 public class SaveNoteObject {
 	
+	private String overallID = "getCalendar";
 	private String noteAuthor;
 	private String noteContent;
 	private String noteEvent;
