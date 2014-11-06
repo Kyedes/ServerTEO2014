@@ -45,39 +45,50 @@ public class GiantSwitch {
 		 ** LOGIN **
 		 **********/
 		case "logIn":
-			AuthUser AU = (AuthUser)gson.fromJson(jsonString, AuthUser.class);
-			System.out.println("Recieved logIn");
-			answer = SW.authenticate(AU.getAuthUserEmail(), AU.getAuthUserPassword(), AU.getAuthUserIsAdmin());
+			LogInObject logInObject = gson.fromJson(jsonString, LogInObject.class);
+			LogIn logIn = new LogIn();
+			answer = logIn.execute(logInObject);
+			
+			
+//			AuthUser AU = (AuthUser)gson.fromJson(jsonString, AuthUser.class);
+//			System.out.println("Recieved logIn");
+//			answer = SW.authenticate(AU.getAuthUserEmail(), AU.getAuthUserPassword(), AU.getAuthUserIsAdmin());
 			break;
 
-		case "logOut":
-			System.out.println("Recieved logOut");
-			break;
+//		case "logOut":
+//			System.out.println("Recieved logOut");
+//			break;
 
 		/*************
 		 ** CALENDAR **
 		 *************/
 		case "createcalendar":
-			CreateCalendar CC = (CreateCalendar)gson.fromJson(jsonString, CreateCalendar.class);
-			System.out.println(CC.getcalendarName()+ "Den har lagt det nye ind i klassen");
-			answer = SW.createNewcalendar(CC.getUserName(), CC.getcalendarName(), CC.getPublicOrPrivate());
+			CreateCalendarObject createCalendarObject = (CreateCalendarObject)gson.fromJson(jsonString, CreateCalendarObject.class);
+			CreateCalendar createCalendar = new CreateCalendar();
+			answer = createCalendar.execute(createCalendarObject);
+			
+//			System.out.println(CC.getcalendarName()+ "Den har lagt det nye ind i klassen");
+//			answer = SW.createNewcalendar(CC.getUserName(), CC.getcalendarName(), CC.getPublicOrPrivate());
 			break;
 		
 		case "deletecalendar":
-			DeleteCalendar DC = (DeleteCalendar)gson.fromJson(jsonString, DeleteCalendar.class);
-			System.out.println(DC.getcalendarName()+ "Den har lagt det nye ind i klassen");
-			answer = SW.deletecalendar(DC.getUserName(), DC.getcalendarName());
+			DeleteCalendarObject deleteCalendarObject = (DeleteCalendarObject)gson.fromJson(jsonString, DeleteCalendarObject.class);
+			DeleteCalendar deleteCalendar  = new DeleteCalendar();
+			answer = deleteCalendar.execute(deleteCalendarObject);
+			
+//			System.out.println(DC.getcalendarName()+ "Den har lagt det nye ind i klassen");
+//			answer = SW.deletecalendar(DC.getUserName(), DC.getcalendarName());
 			break;
 		
 //		case "saveImportedcalendar":
 //			break;
 			
 		case "getcalendar":
-			GetCalendarObject gcObject = gson.fromJson(jsonString, GetCalendarObject.class);
+			GetCalendarObject getCalendarObject = gson.fromJson(jsonString, GetCalendarObject.class);
 			GetCalendar getCalendar = new GetCalendar();
-			answer = getCalendar.execute(gcObject);
+			answer = getCalendar.execute(getCalendarObject);
 			
-			System.out.println("Recieved getcalendar");
+//			System.out.println("Recieved getcalendar");
 			break;
 
 //		case "getEvents":
