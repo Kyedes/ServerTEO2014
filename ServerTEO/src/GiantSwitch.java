@@ -55,7 +55,7 @@ public class GiantSwitch {
 //			answer = SW.authenticate(AU.getAuthUserEmail(), AU.getAuthUserPassword(), AU.getAuthUserIsAdmin());
 			break;
 
-//		case "logOut":
+//			case "logOut":
 //			System.out.println("Recieved logOut");
 //			break;
 
