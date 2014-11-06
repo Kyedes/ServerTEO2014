@@ -69,10 +69,8 @@ public class GiantSwitch {
 			answer = SW.deletecalendar(DC.getUserName(), DC.getcalendarName());
 			break;
 		
-		case "saveImportedcalendar":
-			
-			
-			break;
+//		case "saveImportedcalendar":
+//			break;
 			
 		case "getcalendar":
 			GetCalendarObject gcObject = gson.fromJson(jsonString, GetCalendarObject.class);
@@ -97,19 +95,28 @@ public class GiantSwitch {
 		case "deleteEvent":
 			DeleteEventObject deleteEO = gson.fromJson(jsonString, DeleteEventObject.class);
 			DeleteEvent deleteE = new DeleteEvent();
-			deleteE.execute(deleteEO);
+			answer = deleteE.execute(deleteEO);
 			System.out.println("Recieved deleteEvent");
 		
 		case "saveNote":
-			System.out.println("Recieved saveNote");
+			SaveNoteObject saveNoteObject = gson.fromJson(jsonString, SaveNoteObject.class);
+			SaveNote saveNote = new SaveNote();
+			answer = saveNote.execute(saveNoteObject);
+//			System.out.println("Recieved saveNote");
 			break;
 
 		case "getNote":
-			System.out.println("Recieved getNote");
+			GetNoteObject getNoteObject = gson.fromJson(jsonString, GetNoteObject.class);
+			GetNote getNote = new GetNote();
+			answer = getNote.execute(getNoteObject);
+//			System.out.println("Recieved getNote");
 			break;
 			
 		case "deleteNote":
-			System.out.println("Recieved deleteNote");
+			DeleteNoteObject deleteNoteObject = gson.fromJson(jsonString, DeleteNoteObject.class);
+			DeleteNote deleteNote = new DeleteNote();
+			answer = deleteNote.execute(deleteNoteObject);
+//			System.out.println("Recieved deleteNote");
 			break;
 
 		/**********
