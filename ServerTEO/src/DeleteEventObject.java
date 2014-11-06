@@ -1,6 +1,7 @@
 
 public class DeleteEventObject {
 	
+	private String overallID = "deleteEvent";
 	private String eventToDelete;
 	private String authEvent;
 	
