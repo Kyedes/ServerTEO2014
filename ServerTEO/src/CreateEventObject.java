@@ -9,7 +9,14 @@ public class CreateEventObject implements java.io.Serializable
 	public String timeStart;
 	public String timeFinished;
 	public String author;
+	public String calendarName;
 	
+	public String getCalendarName() {
+		return calendarName;
+	}
+	public void setCalendarName(String calendarName) {
+		this.calendarName = calendarName;
+	}
 	public String getOverallID() {
 		return overallID;
 	}

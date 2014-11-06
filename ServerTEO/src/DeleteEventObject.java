@@ -2,9 +2,6 @@
 public class DeleteEventObject implements java.io.Serializable
 {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4749520182118516370L;
 	private String overallID = "deleteEvent";
 	private String eventToDelete;
