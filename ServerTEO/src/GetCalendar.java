@@ -4,12 +4,12 @@ public class GetCalendar extends Model{
 	
 	private QueryBuilder qBuilder = new QueryBuilder();
 	
-	public String execute (String UserID) throws Exception{
+	public String execute (GetCalendarObject gcObject) throws Exception{
 		
 		String returnString = "";
 		
 		//Her skal alle kalendre som brugeren abonere på hentes fra databasen
-		resultSet = qBuilder.selectFrom("calendar").where("User", "=", UserID).ExecuteQuery();
+		resultSet = qBuilder.selectFrom("calendar").where("User", "=", gcObject.getUserID()).ExecuteQuery();
 		
 		//her skal alle kalendrene lægges i en array som kan castes til en jsonstring og sendes
 		

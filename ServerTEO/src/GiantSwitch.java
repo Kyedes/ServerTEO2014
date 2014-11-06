@@ -85,7 +85,10 @@ public class GiantSwitch {
 //			break;
 
 		case "createEvent":
-			System.out.println("Recieved saveEvent");
+			CreateEventObject createEventObject = gson.fromJson(jsonString, CreateEventObject.class);
+			CreateEvent createEvent = new CreateEvent();
+			answer = createEvent.execute(createEventObject);
+//			System.out.println("Recieved saveEvent");
 			break;
 
 //		case "getEventInfo":
@@ -96,7 +99,8 @@ public class GiantSwitch {
 			DeleteEventObject deleteEO = gson.fromJson(jsonString, DeleteEventObject.class);
 			DeleteEvent deleteE = new DeleteEvent();
 			answer = deleteE.execute(deleteEO);
-			System.out.println("Recieved deleteEvent");
+//			System.out.println("Recieved deleteEvent");
+			break;
 		
 		case "saveNote":
 			SaveNoteObject saveNoteObject = gson.fromJson(jsonString, SaveNoteObject.class);
