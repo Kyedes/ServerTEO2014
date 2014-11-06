@@ -142,7 +142,7 @@ public class GiantSwitch {
 			break;
 		
 		default:
-			System.out.println("Error");
+			answer = "System Error: overallID not recogniced";
 			break;
 		}
 		return answer;
