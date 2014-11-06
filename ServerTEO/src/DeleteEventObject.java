@@ -6,6 +6,7 @@ public class DeleteEventObject {
 	private String authEvent;
 	
 	
+	
 	public String getEventToDelete() {
 		return eventToDelete;
 	}
