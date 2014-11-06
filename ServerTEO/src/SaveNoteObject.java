@@ -1,11 +1,23 @@
 
-public class SaveNoteObject {
+public class SaveNoteObject implements java.io.Serializable
+{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1269487144151426011L;
 	private String overallID = "getCalendar";
 	private String noteAuthor;
 	private String noteContent;
 	private String noteEvent;
 	
+	
+	public String getOverallID() {
+		return overallID;
+	}
+	public void setOverallID(String overallID) {
+		this.overallID = overallID;
+	}
 	
 	public String getNoteAuthor() {
 		return noteAuthor;
