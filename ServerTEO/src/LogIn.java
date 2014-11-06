@@ -5,7 +5,7 @@ public class LogIn extends Model{
 
 	QueryBuilder qb = new QueryBuilder();
 	
-	// Metoden får email og password fra switchen (udtrukket fra en json) samt en boolean der skal saettes til true hvis det er serveren der logger paa, og false hvis det er en klient
+	// Metoden faar email og password fra switchen (udtrukket fra en json) samt en boolean der skal saettes til true hvis det er serveren der logger paa, og false hvis det er en klient
 	/**
 	 * Allows the client to log in
 	 * @param email
@@ -15,7 +15,7 @@ public class LogIn extends Model{
 	 * @throws Exception
 	 */
 	
-	public String authenticate(String email, String password, boolean isAdmin) throws Exception {
+	public String authenticateUser(String email, String password, boolean isAdmin) throws Exception {
 
 		String[] keys = {"userid", "email", "active", "password"};
 
@@ -27,7 +27,7 @@ public class LogIn extends Model{
 		// Hvis en bruger med forespurgt email findes
 		if (resultSet.next()){
 
-			// Hvis brugeren er aktiv
+			// If the user exists the if statement continues:
 			if(resultSet.getInt("active")==1)
 			{					
 				// Hvis passwords matcher
