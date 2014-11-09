@@ -7,33 +7,46 @@ import model.QueryBuild.QueryBuilder;
 public class DeleteEvent extends Model{
 	private DatabaseTableConfigurations dbConfig = new DatabaseTableConfigurations();
 	private QueryBuilder queryBuilder = new QueryBuilder();
-	
+	private boolean auther;
+
 	public String execute(DeleteEventObject deleteEventObject) throws SQLException{
 		String answer = "";
-		
-		resultSet = queryBuilder.selectFrom(dbConfig.getEvents()).where("Name", "=", deleteEventObject.getEventToDelete()).ExecuteQuery();
-		
+
+		String[] valuesCalendar = {"calnedarID"};
+		String[] valuesUser = {"userID"};
+
+		String calendarID = queryBuilder.selectFrom(valuesCalendar, "Events").where("evntName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery().toString();
+
+		int userID = queryBuilder.selectFrom(valuesUser, "Users").where("email", "=", deleteEventObject.getAuthEvent()).ExecuteQuery().getInt("userID");
+
+		resultSet = queryBuilder.selectFrom("CalendarUser").where("calendarID", "=", calendarID).ExecuteQuery();
+
+		auther = false;
+
 		while(resultSet.next()){
-			String [] value = {"CreatedBy"};
-			
-			//TODO compare list of user/event with user and event name
-			
-			String eventAuthor = queryBuilder.selectFrom(value, dbConfig.getEvents()).where("Name", "=", deleteEventObject.getEventToDelete()).ExecuteQuery().toString();
-			
-			if(deleteEventObject.getAuthEvent().equalsIgnoreCase(eventAuthor)){
-				
-				queryBuilder.deleteFrom(dbConfig.getEvents()).where("Name", "=", deleteEventObject.getEventToDelete());
-							
-				//TODO Create code to delete notes associated with event
-				
-				answer = String.format("Event " + deleteEventObject.getEventToDelete() + "has been deleted.");
-				
-			}else{
-				answer = "Your are not the owner of this Event";
-				
+			if(resultSet.getInt("userID") == (userID)){
+				auther = true;
 			}
 		}
-		
+
+		if (auther){
+
+
+			resultSet = queryBuilder.selectFrom(dbConfig.getEvents()).where("eventName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery();
+
+			while(resultSet.next()){
+
+				queryBuilder.deleteFrom(dbConfig.getEvents()).where("eventName", "=", deleteEventObject.getEventToDelete());
+				String[] valuesEvent = {"eventID"};
+				String eventID = queryBuilder.selectFrom(valuesEvent, "Events").where("eventName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery().toString();
+				queryBuilder.deleteFrom("Notes").where("eventID", "=", eventID);
+				answer = String.format("Event " + deleteEventObject.getEventToDelete() + "has been deleted, with associated note.");
+
+			}
+		}else{
+			answer = "Your are not the owner of this Event";
+		}
+
 		return answer;
 	}
 }

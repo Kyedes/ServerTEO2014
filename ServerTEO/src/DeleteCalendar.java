@@ -15,6 +15,8 @@ public class DeleteCalendar extends Model{
 		String [] valueUser = {"userID"};
 
 		String [] valueImport = {"import"};
+		
+		String[] valuesEvent = {"eventID"};
 
 		String calendarID = queryBuilder.selectFrom(valueCalendar, "Calendar").where("CalendarName", "=", deleteCalendarObject.getCalendarToDelete()).ExecuteQuery().toString();
 
@@ -40,10 +42,17 @@ public class DeleteCalendar extends Model{
 			if(auther){
 
 				queryBuilder.deleteFrom(dbConfig.getCalendar()).where("CalendarID", "=", calendarID);
-
+				
+				resultSet = queryBuilder.selectFrom(valuesEvent, "Events").where("CalendarID", "=", calendarID).ExecuteQuery();
+				while(resultSet.next()){
+					String eventID = resultSet.getString("eventID");
+					queryBuilder.deleteFrom("Notes").where("eventID", "=", eventID);
+				}
+				
 				queryBuilder.deleteFrom(dbConfig.getEvents()).where("CalendarID", "=", calendarID);
-
-				answer = String.format("Calendar " + deleteCalendarObject.getCalendarToDelete() + "has been deleted, along with all associated events.");
+				
+				
+				answer = String.format("Calendar " + deleteCalendarObject.getCalendarToDelete() + "has been deleted, along with all associated events and notes.");
 
 			}else{
 				answer = "You do not have the rights to delete this calendar.";
