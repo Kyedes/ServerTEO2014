@@ -1,25 +1,66 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import model.QueryBuild.QueryBuilder;
 import model.Model;
 
 public class LogIn extends Model{
 
-	QueryBuilder qb = new QueryBuilder();
-	
-	// Metoden faar email og password fra switchen (udtrukket fra en json) samt en boolean der skal saettes til true hvis det er serveren der logger paa, og false hvis det er en klient
+	private QueryBuilder qb = new QueryBuilder();
+	private Gson gson = new GsonBuilder().create();
+
 	/**
 	 * Allows the client to log in
 	 * @param email
 	 * @param password
 	 * @param isAdmin
-	 * @return
+	 * @return answer
 	 * @throws Exception
 	 */
-	
+
+	public String execute(LogInObject logInObject) throws Exception{
+
+		String answer = "";
+
+		String result = authenticateUser(logInObject.getAuthUsername(), logInObject.getAuthPassword(), logInObject.getIsAdmin());
+
+		LogInReturnObject returnO = new LogInReturnObject();
+
+
+		switch (result){
+		case "1":
+			returnO.setLogOn(false);
+			returnO.setExplination("The email or password is incorect.");
+			break;
+		case "2":
+			returnO.setLogOn(false);
+			returnO.setExplination("The user is inactive; contact an admin to resolve the issue.");
+			break;
+		case "3":
+			returnO.setLogOn(false);
+			returnO.setOverallID("brugertype ikke stemmer overens med loginplatform.");
+			break;
+		case "0":
+			returnO.setLogOn(true);
+			returnO.setExplination("Logon succesfull.");
+			break;
+		default:
+			returnO.setLogOn(false);
+			returnO.setExplination("System error.");
+			break;
+
+		}
+		
+		answer = gson.toJson(returnO);
+
+		return answer;
+	}
+
 	public String authenticateUser(String email, String password, boolean isAdmin) throws Exception {
 
 		String[] keys = {"userid", "email", "active", "password"};
 
-//		qb = new QueryBuilder();
+		//		qb = new QueryBuilder();
 
 		// Henter info om bruger fra database via querybuilder
 		resultSet = qb.selectFrom(keys, "users").where("email", "=", email).ExecuteQuery();
@@ -27,11 +68,12 @@ public class LogIn extends Model{
 		// Hvis en bruger med forespurgt email findes
 		if (resultSet.next()){
 
-			// If the user exists the if statement continues:
-			if(resultSet.getInt("active")==1)
-			{					
-				// Hvis passwords matcher
-				if(resultSet.getString("password").equals(password))
+
+			// Hvis passwords matcher
+			if(resultSet.getString("password").equals(password))
+			{
+				// If the user exists the if statement continues:
+				if(resultSet.getBoolean("active"))
 				{
 					int userID = resultSet.getInt("userid");
 
@@ -44,22 +86,19 @@ public class LogIn extends Model{
 					{
 						return "0"; // returnerer "0" hvis bruger/admin er godkendt
 					} else {
-						return "4"; // returnerer fejlkoden "4" hvis brugertype ikke stemmer overens med loginplatform
+						return "3"; // returnerer fejlkoden "3" hvis brugertype ikke stemmer overens med loginplatform
 					}
 				} else {
-					return "3"; // returnerer fejlkoden "3" hvis password ikke matcher
+					return "2"; // returnerer fejlkoden "2" hvis bruger er sat som inaktiv
+					
 				}
 			} else {
-				return "2"; // returnerer fejlkoden "2" hvis bruger er sat som inaktiv
+				return "1"; // returnerer fejlkoden "1" hvis password eller username ikke matcher
 			}
 		} else {
-			return "1"; // returnerer fejlkoden "1" hvis email ikke findes
+			return "1"; // returnerer fejlkoden "1" hvis email eller password ikke findes
 		}
-		
-		//Her skal der være en public string execute methode der indeholder en switch som ændrer boolean'en loginsuccesful fra false til true
-		//når sqitchen ovenfor returnerer. Der skal oprettes en anden objekt klasse hvor der ligger en boolean og en string. Sð laves der
-		//et objekt af den klasse i DENNE klases som kalder methoderne fra den anden klasse. Objekt er til sende objekter som json string.
-		
+
 	}
-	
+
 }

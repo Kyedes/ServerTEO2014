@@ -4,9 +4,9 @@ public class LogInObject implements java.io.Serializable
 
 	private static final long serialVersionUID = -5488436560146102137L;
 	private String overallID = "getCalendar";
-	private String authUsername;
+	private String authUserEmail;
 	private String authPassword;
-	private String isAdmin;
+	private boolean isAdmin;
 	
 	
 	public String getOverallID() {
@@ -16,10 +16,10 @@ public class LogInObject implements java.io.Serializable
 		this.overallID = overallID;
 	}
 	public String getAuthUsername() {
-		return authUsername;
+		return authUserEmail;
 	}
 	public void setAuthUsername(String authUsername) {
-		this.authUsername = authUsername;
+		this.authUserEmail = authUsername;
 	}
 	public String getAuthPassword() {
 		return authPassword;
@@ -27,10 +27,10 @@ public class LogInObject implements java.io.Serializable
 	public void setAuthPassword(String authPassword) {
 		this.authPassword = authPassword;
 	}
-	public String getIsAdmin() {
+	public boolean getIsAdmin() {
 		return isAdmin;
 	}
-	public void setIsAdmin(String isAdmin) {
+	public void setIsAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 

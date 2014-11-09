@@ -20,11 +20,11 @@ public class DeleteCalendar extends Model{
 
 		//TODO Strings here but integer in database?
 		
-		int userID = queryBuilder.selectFrom(valueUser, "Users").where("UserName", "=", deleteCalendarObject.getAuthCalendar()).ExecuteQuery().getInt(1);
+		int userID = queryBuilder.selectFrom(valueUser, "Users").where("UserName", "=", deleteCalendarObject.getAuthCalendar()).ExecuteQuery().getInt("userID");
 		
 		boolean auther = false;
 
-		boolean imported = queryBuilder.selectFrom(valueImport, "Calendar").where("calendarID", "=", calendarID).ExecuteQuery().getBoolean(1);
+		boolean imported = queryBuilder.selectFrom(valueImport, "Calendar").where("calendarID", "=", calendarID).ExecuteQuery().getBoolean("imported");
 
 		if(imported == false){
 			resultSet = queryBuilder.selectFrom(valueUser, "AutherCalendar").where("CalendarID", "=", calendarID).ExecuteQuery();
@@ -32,7 +32,7 @@ public class DeleteCalendar extends Model{
 			while(resultSet.next()){
 
 				//TODO Check if resultset is used correctly
-				if(resultSet.getInt(1) == userID){
+				if(resultSet.getInt("userID") == userID){
 					auther = true;
 				}
 			}
