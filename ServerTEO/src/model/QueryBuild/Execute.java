@@ -120,7 +120,7 @@ public class Execute extends Model {
                 String cleanSql = StringEscapeUtils.escapeSql(sql);
                 sqlStatement = getConn().prepareStatement(cleanSql);
                 sqlStatement.setString(1, getWhere().getWhereValue());
-
+//TODO cleansql to script?
             } catch (SQLException e) {
                 e.printStackTrace();
             }
