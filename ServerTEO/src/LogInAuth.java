@@ -4,6 +4,6 @@ public class LogInAuth {
 
 	private boolean LogInSuccessful = false;
 	
-	
+	public String logInAuthMethod(String ) 
 	
 }

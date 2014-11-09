@@ -55,6 +55,11 @@ public class LogIn extends Model{
 		} else {
 			return "1"; // returnerer fejlkoden "1" hvis email ikke findes
 		}
+		
+		//Her skal der være en public string execute methode der indeholder en switch som ændrer boolean'en loginsuccesful fra false til true
+		//når sqitchen ovenfor returnerer. Der skal oprettes en anden objekt klasse hvor der ligger en boolean og en string. Sð laves der
+		//et objekt af den klasse i DENNE klases som kalder methoderne fra den anden klasse. Objekt er til sende objekter som json string.
+		
 	}
 	
 }
