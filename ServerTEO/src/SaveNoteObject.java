@@ -4,9 +4,9 @@ public class SaveNoteObject implements java.io.Serializable
 	
 	private static final long serialVersionUID = 1269487144151426011L;
 	private String overallID = "getCalendar";
-	private String noteAuthor;
+	private String userEmail;
 	private String noteContent;
-	private String noteEvent;
+	private String eventName;
 	
 	public String getOverallID() {
 		return overallID;
@@ -15,11 +15,11 @@ public class SaveNoteObject implements java.io.Serializable
 		this.overallID = overallID;
 	}
 	
-	public String getNoteAuthor() {
-		return noteAuthor;
+	public String getUserEmail() {
+		return userEmail;
 	}
-	public void setNoteAuthor(String noteAuthor) {
-		this.noteAuthor = noteAuthor;
+	public void setUserEmail(String noteAuthor) {
+		this.userEmail = noteAuthor;
 	}
 	public String getNoteContent() {
 		return noteContent;
@@ -27,11 +27,11 @@ public class SaveNoteObject implements java.io.Serializable
 	public void setNoteContent(String noteContent) {
 		this.noteContent = noteContent;
 	}
-	public String getNoteEvent() {
-		return noteEvent;
+	public String getEventName() {
+		return eventName;
 	}
-	public void setNoteEvent(String noteEvent) {
-		this.noteEvent = noteEvent;
+	public void setEventName(String noteEvent) {
+		this.eventName = noteEvent;
 	}
 	
 	
