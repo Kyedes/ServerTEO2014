@@ -4,7 +4,7 @@ public class DeleteCalendarObject implements java.io.Serializable
 	private static final long serialVersionUID = 4429483023071064697L;
 	private String overallID = "getCalendar";
 	private String calendarToDelete;
-	private String authCalendar;
+	private String userID;
 	
 	
 	public String getOverallID() {
@@ -19,11 +19,11 @@ public class DeleteCalendarObject implements java.io.Serializable
 	public void setCalendarToDelete(String calendarToDelete) {
 		this.calendarToDelete = calendarToDelete;
 	}
-	public String getAuthCalendar() {
-		return authCalendar;
+	public String getuserID() {
+		return userID;
 	}
-	public void setAuthCalendar(String authCalendar) {
-		this.authCalendar = authCalendar;
+	public void setuserID(String userID) {
+		this.userID = userID;
 	}
 
 }

@@ -22,7 +22,7 @@ public class DeleteCalendar extends Model{
 
 		//TODO Strings here but integer in database?
 		
-		int userID = queryBuilder.selectFrom(valueUser, "Users").where("UserName", "=", deleteCalendarObject.getAuthCalendar()).ExecuteQuery().getInt("userID");
+		int userID = queryBuilder.selectFrom(valueUser, "Users").where("UserName", "=", deleteCalendarObject.getuserID()).ExecuteQuery().getInt("userID");
 		
 		boolean author = false;
 
