@@ -13,11 +13,10 @@ public class CreateCalendar extends Model{
 		boolean doesExist = authenticateNewCalender(createCalendarObject.getCalendarName());
 		
 		if ( doesExist == false){
-			String [] keys = {"Name","CreatedBy","PrivatePublic"};
+			String [] keys = {"calendarName","imported","privatePublic"};
 			String [] values = {
 					createCalendarObject.getCalendarName(), 
-//					Integer.toString(createCalendarObject.getActive()), 
-					createCalendarObject.getCreatedBy(), 
+					createCalendarObject.isImported(), //TODO ret
 					Integer.toString(createCalendarObject.getPrivatePublic())
 					};
 			
