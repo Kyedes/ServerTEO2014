@@ -1,4 +1,4 @@
-package quote;
+
 
 public class QuoteObject {
 

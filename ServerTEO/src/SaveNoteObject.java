@@ -8,7 +8,6 @@ public class SaveNoteObject implements java.io.Serializable
 	private String noteContent;
 	private String noteEvent;
 	
-	
 	public String getOverallID() {
 		return overallID;
 	}

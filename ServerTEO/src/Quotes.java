@@ -1,4 +1,4 @@
-package quote;
+
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -19,7 +19,6 @@ import model.QueryBuild.QueryBuilder;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import forecast.ForecastObject;
 
 public class Quotes {
 
@@ -92,7 +91,7 @@ public class Quotes {
      */
   	public String getQuote(){
   		String q = "";
-  		String[] key = {"quote"};
+  		String[] key = {"qotd"};
   		try {
   			resultSet = qb.selectFrom("dailyupdate").all().ExecuteQuery();
 			while(resultSet.next()) {
@@ -119,7 +118,7 @@ public class Quotes {
 	     	// if more than 1 hour ago, do update
 	     	if(timeSinceUpdate > 864000){
 	     		// return fresh weather data
-	     		saveQuote();
+	     		saveQuote();	
 	     	} 
 	     }
   	
