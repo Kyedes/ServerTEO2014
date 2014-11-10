@@ -5,8 +5,8 @@ public class CreateCalendarObject implements java.io.Serializable
 	private String overallID = "deleteEvent";
 	private String calendarName;
 	private int privatePublic;
-	private String createdBy;
-	private int active;
+	private boolean imported;
+	
 	
 	
 	public int getPrivatePublic() {
@@ -27,17 +27,12 @@ public class CreateCalendarObject implements java.io.Serializable
 	public void setCalendarName(String calendarName) {
 		this.calendarName = calendarName;
 	}
-	public int getActive() {
-		return active;
+	
+	public boolean getCreatedBy() {
+		return imported;
 	}
-	public void setActive(int active) {
-		this.active = active;
-	}
-	public String getCreatedBy() {
-		return createdBy;
-	}
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
+	public void setCreatedBy(boolean imported) {
+		this.imported = imported;
 	}
 
 }
