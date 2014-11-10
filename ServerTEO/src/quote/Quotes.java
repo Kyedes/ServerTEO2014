@@ -92,7 +92,7 @@ public class Quotes {
      */
   	public String getQuote(){
   		String q = "";
-  		String[] key = {"qotd"};
+  		String[] key = {"quote"};
   		try {
   			resultSet = qb.selectFrom("dailyupdate").all().ExecuteQuery();
 			while(resultSet.next()) {
@@ -119,7 +119,7 @@ public class Quotes {
 	     	// if more than 1 hour ago, do update
 	     	if(timeSinceUpdate > 864000){
 	     		// return fresh weather data
-	     		saveQuote();	
+	     		saveQuote();
 	     	} 
 	     }
   	

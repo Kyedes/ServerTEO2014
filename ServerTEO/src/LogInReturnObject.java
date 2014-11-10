@@ -28,6 +28,4 @@ public class LogInReturnObject implements java.io.Serializable {
 		this.explination = explination;
 	}
 	
-	
-	
 }
