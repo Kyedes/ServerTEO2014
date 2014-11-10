@@ -16,7 +16,7 @@ public class SaveNote extends Model{
 
 		String calendarID = queryBuilder.selectFrom(valueCalendar, "Events").where("eventName", "=", saveNoteObject.getEventName()).ExecuteQuery().toString();
 
-		int userID = queryBuilder.selectFrom(valueUser, "Users").where("UserName", "=", saveNoteObject.getUserEmail()).ExecuteQuery().getInt(1);
+		int userID = queryBuilder.selectFrom(valueUser, "Users").where("email", "=", saveNoteObject.getUserEmail()).ExecuteQuery().getInt(1);
 
 		boolean author = false;
 
@@ -30,6 +30,21 @@ public class SaveNote extends Model{
 		
 		if (author){
 			int eventID = queryBuilder.selectFrom(valueEvent, "Events").where("eventName", "=", saveNoteObject.getEventName()).ExecuteQuery().getInt("eventID");
+			resultSet = queryBuilder.selectFrom("Notes").where("eventID", "=", eventID);
+			
+			boolean noteExists;
+			
+			while(resultSet.next()){
+				if(resultSet.getInt("eventID") == eventID){
+					noteExists = true;
+				}	
+			}
+			if(noteExists){
+				//Update
+				//else
+				//InsertInto
+			}
+			
 		}
 
 
