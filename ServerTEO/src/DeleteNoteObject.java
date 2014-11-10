@@ -4,7 +4,7 @@ public class DeleteNoteObject implements java.io.Serializable{
 	private static final long serialVersionUID = 1026261677650219409L;
 	private String overallID = "deleteNote";
 	private String noteToDelete;
-	private String authNote;
+	private String userID;
 	
 	public String getOverallID() {
 		return overallID;
@@ -19,10 +19,10 @@ public class DeleteNoteObject implements java.io.Serializable{
 		this.noteToDelete = noteToDelete;
 	}
 	public String getAuthNote() {
-		return authNote;
+		return userID;
 	}
 	public void setAuthNote(String authNote) {
-		this.authNote = authNote;
+		this.userID = authNote;
 	}
 	
 }

@@ -6,7 +6,7 @@ public class CreateCalendarObject implements java.io.Serializable
 	private String calendarName;
 	private int privatePublic;
 	private String createdBy;
-	private int active;
+	//private int active;
 	
 	
 	public int getPrivatePublic() {
@@ -27,12 +27,12 @@ public class CreateCalendarObject implements java.io.Serializable
 	public void setCalendarName(String calendarName) {
 		this.calendarName = calendarName;
 	}
-	public int getActive() {
-		return active;
-	}
-	public void setActive(int active) {
-		this.active = active;
-	}
+//	public int getActive() {
+//		return active;
+//	}
+//	public void setActive(int active) {
+//		this.active = active;
+//	}
 	public String getCreatedBy() {
 		return createdBy;
 	}

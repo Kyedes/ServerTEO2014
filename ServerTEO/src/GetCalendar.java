@@ -5,7 +5,6 @@ import java.util.Date;
 
 import model.Model;
 import model.QueryBuild.*;
-import model.calendar.Event;
 
 import com.google.gson.*;
 
