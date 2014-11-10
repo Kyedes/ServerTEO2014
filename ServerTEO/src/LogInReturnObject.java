@@ -7,7 +7,7 @@ public class LogInReturnObject implements java.io.Serializable {
 	private static final long serialVersionUID = 1274538738336421428L;
 	private String overallID = "logInReturn";
 	private boolean logOn;
-	private String explination;
+	private String explanation;
 	
 	public String getOverallID() {
 		return overallID;
@@ -21,11 +21,11 @@ public class LogInReturnObject implements java.io.Serializable {
 	public void setLogOn(boolean logOn) {
 		this.logOn = logOn;
 	}
-	public String getExplination() {
-		return explination;
+	public String getExplanation() {
+		return explanation;
 	}
-	public void setExplination(String explination) {
-		this.explination = explination;
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
 	}
 	
 }

@@ -24,7 +24,7 @@ public class DeleteCalendar extends Model{
 		
 		int userID = queryBuilder.selectFrom(valueUser, "Users").where("UserName", "=", deleteCalendarObject.getAuthCalendar()).ExecuteQuery().getInt("userID");
 		
-		boolean auther = false;
+		boolean author = false;
 
 		boolean imported = queryBuilder.selectFrom(valueImport, "Calendar").where("calendarID", "=", calendarID).ExecuteQuery().getBoolean("imported");
 
@@ -35,11 +35,11 @@ public class DeleteCalendar extends Model{
 
 				//TODO Check if resultset is used correctly
 				if(resultSet.getInt("userID") == userID){
-					auther = true;
+					author = true;
 				}
 			}
 
-			if(auther){
+			if(author){
 
 				queryBuilder.deleteFrom(dbConfig.getCalendar()).where("CalendarID", "=", calendarID);
 				

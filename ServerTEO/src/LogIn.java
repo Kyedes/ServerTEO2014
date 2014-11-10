@@ -30,11 +30,11 @@ public class LogIn extends Model{
 		switch (result){
 		case "1":
 			returnO.setLogOn(false);
-			returnO.setExplination("The email or password is incorect.");
+			returnO.setExplanation("The email or password is incorect.");
 			break;
 		case "2":
 			returnO.setLogOn(false);
-			returnO.setExplination("The user is inactive; contact an admin to resolve the issue.");
+			returnO.setExplanation("The user is inactive; contact an admin to resolve the issue.");
 			break;
 		case "3":
 			returnO.setLogOn(false);
@@ -42,11 +42,11 @@ public class LogIn extends Model{
 			break;
 		case "0":
 			returnO.setLogOn(true);
-			returnO.setExplination("Logon succesfull.");
+			returnO.setExplanation("Logon succesfull.");
 			break;
 		default:
 			returnO.setLogOn(false);
-			returnO.setExplination("System error.");
+			returnO.setExplanation("System error.");
 			break;
 
 		}

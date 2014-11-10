@@ -10,11 +10,12 @@ public class ForecastObject {
     private String celsius;
     private String desc;
 
-    // Funktion som setter dato, grader og beskrivelse til Forecast objektet
+    
+ // Funktion som setter dato, grader og beskrivelse til Forecast objektet
     public ForecastObject(String date, String celsius, String desc) {
         this.date = date;
         this.celsius = celsius;
-        this.desc = desc;
+        this.desc = desc;  
     }
     
     // Settere og gettere for Forecast klassen

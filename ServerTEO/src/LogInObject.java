@@ -3,7 +3,7 @@ public class LogInObject implements java.io.Serializable
 {
 
 	private static final long serialVersionUID = -5488436560146102137L;
-	private String overallID = "getCalendar";
+	private String overallID = "logInObject";
 	private String authUserEmail;
 	private String authPassword;
 	private boolean isAdmin;

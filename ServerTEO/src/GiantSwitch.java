@@ -1,7 +1,7 @@
 import java.sql.SQLException;
 
-import quote.Quotes;
-import model.calendar.Event;
+//import quote.Quotes;
+//import model.calendar.Event;
 //import model.note.Note;
 //import JsonClasses.AuthUser;
 //import JsonClasses.CalendarInfo;
@@ -139,7 +139,9 @@ public class GiantSwitch {
 		 **********/
 		case "getQuote":
 
-		answer = QOTDKlasse.getQuote();
+			Quotes quotes = new Quotes();
+			
+		answer = quotes.getQuote();
 			System.out.println(answer);
 			
 			break;
