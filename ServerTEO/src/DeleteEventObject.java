@@ -4,7 +4,7 @@ public class DeleteEventObject implements java.io.Serializable{
 	private static final long serialVersionUID = -4749520182118516370L;
 	private String overallID = "deleteEvent";
 	private String eventToDelete;
-	private String authEvent;
+	private String userID;
 	
 	public String getOverallID() {
 		return overallID;
@@ -18,11 +18,11 @@ public class DeleteEventObject implements java.io.Serializable{
 	public void setEventToDelete(String eventToDelete) {
 		this.eventToDelete = eventToDelete;
 	}
-	public String getAuthEvent() {
-		return authEvent;
+	public String getuserID() {
+		return userID;
 	}
-	public void setAuthEvent(String authEvent) {
-		this.authEvent = authEvent;
+	public void setuserID(String userID) {
+		this.userID = userID;
 	}
 
 }
