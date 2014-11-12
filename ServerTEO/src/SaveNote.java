@@ -16,28 +16,30 @@ public class SaveNote extends Model{
 
 		String calendarID = queryBuilder.selectFrom(valueCalendar, "Events").where("eventName", "=", saveNoteObject.getEventName()).ExecuteQuery().toString();
 
-		int userID = queryBuilder.selectFrom(valueUser, "Users").where("email", "=", saveNoteObject.getUserEmail()).ExecuteQuery().getInt(1);
+		String userID = queryBuilder.selectFrom(valueUser, "Users").where("email", "=", saveNoteObject.getUserEmail()).ExecuteQuery().getString("userID");
 
 		boolean author = false;
 
 		resultSet = queryBuilder.selectFrom("Author").where("calendarID", "=", calendarID).ExecuteQuery();
 
 		while(resultSet.next()){
-			if(resultSet.getInt("userID") == userID){
+			if(resultSet.getString("userID").equals(userID)){
 				author = true;
 			}	
 		}
 		
 		if (author){
-			int eventID = queryBuilder.selectFrom(valueEvent, "Events").where("eventName", "=", saveNoteObject.getEventName()).ExecuteQuery().getInt("eventID");
-			resultSet = queryBuilder.selectFrom("Notes").where("eventID", "=", eventID);
+			String eventID = queryBuilder.selectFrom(valueEvent, "Events").where("eventName", "=", saveNoteObject.getEventName()).ExecuteQuery().getString("eventID");
+			resultSet = queryBuilder.selectFrom("Notes").where("eventID", "=", eventID).ExecuteQuery();
 			
-			boolean noteExists;
+			boolean noteExists = false;
 			
 			while(resultSet.next()){
-				if(resultSet.getInt("eventID") == eventID){
+				if(resultSet.getString("eventID").equalsIgnoreCase(eventID)){
 					noteExists = true;
-				}	
+				}else{
+					noteExists = false;
+				}
 			}
 			if(noteExists){
 				//Update
@@ -47,6 +49,6 @@ public class SaveNote extends Model{
 			
 		}
 
-
+		return answer;
 	}
 }
