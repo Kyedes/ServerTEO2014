@@ -53,8 +53,8 @@ public class ImportCalendarData {
         Events events = gson.fromJson(json, Events.class); 
 
         //tester events activityID's
-        for (int i = 0; i < events.getEvents().size(); i++){
-            System.out.println(events.getEvents().get(i).getActivityid());
-        }
+//        for (int i = 0; i < events.getEvents().size(); i++){
+//            System.out.println(events.getEvents().get(i).getActivityid());
+//        }
     }
 }

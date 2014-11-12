@@ -3,7 +3,7 @@ public class DeleteNoteObject implements java.io.Serializable{
 	
 	private static final long serialVersionUID = 1026261677650219409L;
 	private String overallID = "deleteNote";
-	private String noteToDelete;
+	private String eventID;
 	private String userID;
 	
 	public String getOverallID() {
@@ -12,11 +12,11 @@ public class DeleteNoteObject implements java.io.Serializable{
 	public void setOverallID(String overallID) {
 		this.overallID = overallID;
 	}
-	public String getNoteToDelete() {
-		return noteToDelete;
+	public String getEventID() {
+		return eventID;
 	}
-	public void setNoteToDelete(String noteToDelete) {
-		this.noteToDelete = noteToDelete;
+	public void setEventID(String noteToDelete) {
+		this.eventID = noteToDelete;
 	}
 	public String getAuthNote() {
 		return userID;

@@ -9,13 +9,15 @@ import model.QueryBuild.*;
 
 import com.google.gson.*;
 
-public class GetCalendar extends Model{
+public class GetCalendar{
 	
 	private QueryBuilder qBuilder = new QueryBuilder();
 	private ResultSet resultSet2;
+	private ResultSet resultSet;
 	private ArrayList<ArrayList<Event>> calendars;
 	private ArrayList<Event> calendar;
 	private Gson gson = new GsonBuilder().create();
+	
 	
 	public String execute (GetCalendarObject gcObject) throws SQLException{
 		

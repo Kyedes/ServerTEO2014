@@ -23,7 +23,7 @@ public class CreateCalendar extends Model{
 			String [] keys = {"calendarName","imported","privatePublic"};
 			String [] values = {
 					createCalendarObject.getCalendarName(), 
-					"false",//A newly created calendar is never imported.
+					"0",//A newly created calendar is never imported.
 					createCalendarObject.getPrivatePublic()
 					};
 			
@@ -88,6 +88,7 @@ public class CreateCalendar extends Model{
 		{
 			doesExist = true;
 		}
+		
 		return doesExist;
 	}
 }

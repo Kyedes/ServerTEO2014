@@ -1,10 +1,7 @@
 import java.sql.SQLException;
-
 import com.google.gson.Gson;
-
 import model.Model;
 import model.QueryBuild.QueryBuilder;
-
 
 public class GetNote extends Model {
 
@@ -20,7 +17,7 @@ public class GetNote extends Model {
 		if(resultSet.next()){
 			message = resultSet.getString("notecontent");
 		}else{
-			message = "this event does not have a note yet.";
+			message = "this event does not have a note, yet.";
 		}
 		gnro.setMessage(message);
 		answer = gson.toJson(gnro);
