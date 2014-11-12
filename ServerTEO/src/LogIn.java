@@ -1,3 +1,5 @@
+import java.sql.SQLException;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -8,6 +10,7 @@ public class LogIn extends Model{
 
 	private QueryBuilder qb = new QueryBuilder();
 	private Gson gson = new GsonBuilder().create();
+	private LogInReturnObject logInRO = new LogInReturnObject();
 
 	/**
 	 * Allows the client to log in
@@ -18,45 +21,42 @@ public class LogIn extends Model{
 	 * @throws Exception
 	 */
 
-	public String execute(LogInObject logInObject) throws Exception{
+	public String execute(LogInObject logInObject) throws SQLException{
 
 		String answer = "";
 
 		String result = authenticateUser(logInObject.getAuthUsername(), logInObject.getAuthPassword(), logInObject.getIsAdmin());
-
-		LogInReturnObject returnO = new LogInReturnObject();
-
-
+		
 		switch (result){
 		case "1":
-			returnO.setLogOn(false);
-			returnO.setExplanation("The email or password is incorect.");
+			logInRO.setLogOn(false);
+			logInRO.setExplanation("The email or password is incorect.");
 			break;
 		case "2":
-			returnO.setLogOn(false);
-			returnO.setExplanation("The user is inactive; contact an admin to resolve the issue.");
+			logInRO.setLogOn(false);
+			logInRO.setExplanation("The user is inactive; contact an admin to resolve the issue.");
 			break;
 		case "3":
-			returnO.setLogOn(false);
-			returnO.setOverallID("brugertype ikke stemmer overens med loginplatform.");
+			logInRO.setLogOn(false);
+			logInRO.setOverallID("brugertype ikke stemmer overens med loginplatform.");
 			break;
 		case "0":
-			returnO.setLogOn(true);
-			returnO.setExplanation("Logon succesfull.");
+			logInRO.setLogOn(true);
+			logInRO.setExplanation("Logon succesfull.");
 			break;
 		default:
-			returnO.setLogOn(false);
-			returnO.setExplanation("System error.");
+			logInRO.setLogOn(false);
+			logInRO.setExplanation("System error.");
 			break;
 
 		}
 		
-		answer = gson.toJson(returnO);
+		answer = gson.toJson(logInRO);
 
 		return answer;
 	}
 
-	public String authenticateUser(String email, String password, boolean isAdmin) throws Exception {
+	public String authenticateUser(String email, String password, boolean isAdmin) throws SQLException {
 
 		String[] keys = {"userid", "email", "active", "password"};
 
@@ -66,20 +66,19 @@ public class LogIn extends Model{
 		resultSet = qb.selectFrom(keys, "users").where("email", "=", email).ExecuteQuery();
 
 		// Hvis en bruger med forespurgt email findes
-		if (resultSet.next()){
-
-
+		if (resultSet.next())
+		{
 			// Hvis passwords matcher
 			if(resultSet.getString("password").equals(password))
 			{
-				// If the user exists the if statement continues:
+				// If the user is activ
 				if(resultSet.getBoolean("active"))
 				{
-					int userID = resultSet.getInt("userid");
+					String userID = resultSet.getString("userid");
 
 					String[] key = {"type"};
 
-					resultSet = qb.selectFrom(key, "roles").where("userid", "=", new Integer(userID).toString()).ExecuteQuery();
+					resultSet = qb.selectFrom(key, "roles").where("userid", "=", userID).ExecuteQuery();
 
 					// Hvis brugeren baade logger ind og er registreret som admin, eller hvis brugeren baade logger ind og er registreret som bruger
 					if((resultSet.getString("type").equals("admin") && isAdmin) || (resultSet.getString("type").equals("user") && !isAdmin))
@@ -93,10 +92,10 @@ public class LogIn extends Model{
 					
 				}
 			} else {
-				return "1"; // returnerer fejlkoden "1" hvis password eller username ikke matcher
+				return "1"; // returnerer fejlkoden "1" hvis email ikke findes eller hvis password og username ikke matcher
 			}
 		} else {
-			return "1"; // returnerer fejlkoden "1" hvis email eller password ikke findes
+			return "1"; // returnerer fejlkoden "1" hvis email ikke findes eller hvis password og username ikke matcher
 		}
 
 	}

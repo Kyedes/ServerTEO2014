@@ -12,6 +12,7 @@ public class EncryptUserID {
      * Constant cipher seed - DO NOT CHANGE.
      * http://www.miraclesalad.com/webtools/md5.php - Du kan her saette userid foerst og derefter hashkey for at teste
      */
+	//TODO ændre bruger til genrel bruger
     private static final String HASHKEY = "v.eRyzeKretW0r_t";
     private static String userId = "caha13ag";
     private String key;

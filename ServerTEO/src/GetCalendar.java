@@ -1,4 +1,5 @@
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,18 +17,19 @@ public class GetCalendar extends Model{
 	private ArrayList<Event> calendar;
 	private Gson gson = new GsonBuilder().create();
 	
-	public String execute (GetCalendarObject gcObject) throws Exception{
+	public String execute (GetCalendarObject gcObject) throws SQLException{
 		
 		String answer = "";
 		
 		String [] valuesCalendars = {"calendarID"};
 		
-		resultSet = qBuilder.selectFrom(valuesCalendars, "CalendarUser").where("userID", "=", gcObject.getUserID()).ExecuteQuery();
+		resultSet = qBuilder.selectFrom(valuesCalendars, "Subsciption").where("userID", "=", gcObject.getUserID()).ExecuteQuery();
 		
 		while(resultSet.next()){
 			resultSet2 = qBuilder.selectFrom("Events").where("calendarID", "=", resultSet.getString("calendarID")).ExecuteQuery();
 			
 			while (resultSet2.next()){
+				
 				int eventID = resultSet2.getInt("eventid");
 				int type = resultSet2.getInt("type");
 				int location = resultSet2.getInt("location");
@@ -65,6 +67,7 @@ public class GetCalendar extends Model{
 				
 			}
 			calendars.add(calendar);
+			calendar.clear();
 		}
 		
 		answer = gson.toJson(calendars);

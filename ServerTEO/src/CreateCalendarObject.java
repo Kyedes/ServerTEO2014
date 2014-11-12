@@ -1,19 +1,37 @@
+import java.util.ArrayList;
+
 
 public class CreateCalendarObject implements java.io.Serializable
 {
 	private static final long serialVersionUID = -580896570793664110L;
 	private String overallID = "deleteEvent";
 	private String calendarName;
-	private int privatePublic;
-	private boolean imported;
+	private String privatePublic;
+	private ArrayList<String> users;
+	private ArrayList<String> authors;
+//	private boolean imported;
+	
+	public ArrayList<String> getUsers() {
+		return users;
+	}
+	public void setUsers(ArrayList<String> users) {
+		this.users = users;
+	}
+	public ArrayList<String> getAuthors() {
+		return authors;
+	}
+	public void setAuthors(ArrayList<String> authors) {
+		this.authors = authors;
+	}
+	
 	
 
 	
 	
-	public int getPrivatePublic() {
+	public String getPrivatePublic() {
 		return privatePublic;
 	}
-	public void setPrivatePublic(int privatePublic) {
+	public void setPrivatePublic(String privatePublic) {
 		this.privatePublic = privatePublic;
 	}
 	public String getOverallID() {
@@ -28,11 +46,11 @@ public class CreateCalendarObject implements java.io.Serializable
 	public void setCalendarName(String calendarName) {
 		this.calendarName = calendarName;
 	}
-	public boolean isImported() {
-		return imported;
-	}
-	public void setImported(boolean imported) {
-		this.imported = imported;
-	}
+//	public boolean isImported() {
+//		return imported;
+//	}
+//	public void setImported(boolean imported) {
+//		this.imported = imported;
+//	}
 
 }

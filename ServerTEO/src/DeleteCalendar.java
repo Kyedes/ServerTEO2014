@@ -7,6 +7,16 @@ public class DeleteCalendar extends Model{
 	private DatabaseTableConfigurations dbConfig = new DatabaseTableConfigurations();
 	private QueryBuilder queryBuilder = new QueryBuilder();
 
+	/**
+	 * The execute method checks if the user have rights to delete the calendar,
+	 *  and only if this is the case is the calendar deleted. First the the notes of each individual event is deleted;
+	 *   then each event, pertaining to the calendar, gets deleted;
+	 *   then the calendar is deleted; lastly the subscribers and author rights are removed.
+	 * @param deleteCalendarObject
+	 * @return
+	 * @throws SQLException
+	 */
+	
 	public String execute(DeleteCalendarObject deleteCalendarObject) throws SQLException{
 		String answer = "";
 
@@ -40,8 +50,6 @@ public class DeleteCalendar extends Model{
 			}
 
 			if(author){
-
-				queryBuilder.deleteFrom(dbConfig.getCalendar()).where("CalendarID", "=", calendarID);
 				
 				resultSet = queryBuilder.selectFrom(valuesEvent, "Events").where("CalendarID", "=", calendarID).ExecuteQuery();
 				while(resultSet.next()){
@@ -50,6 +58,9 @@ public class DeleteCalendar extends Model{
 				}
 				
 				queryBuilder.deleteFrom(dbConfig.getEvents()).where("CalendarID", "=", calendarID);
+				queryBuilder.deleteFrom(dbConfig.getCalendar()).where("CalendarID", "=", calendarID);
+				queryBuilder.deleteFrom("subscription").where("CalendarID", "=", calendarID);
+				queryBuilder.deleteFrom("autherrights").where("CalendarID", "=", calendarID);
 				
 				
 				answer = String.format("Calendar " + deleteCalendarObject.getCalendarToDelete() + "has been deleted, along with all associated events and notes.");

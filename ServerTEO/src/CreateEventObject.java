@@ -1,33 +1,43 @@
+import java.util.ArrayList;
+
 
 public class CreateEventObject implements java.io.Serializable
 
 {
 	private static final long serialVersionUID = 603624733895783558L;
-	private String overallID = "deleteEvent";
-	public String name;
+	private String overallID = "createEvent";
+	public String type;
+	public String eventName;
+	private String description;
 	public String location;
-	public String timeStart;
-	public String timeFinished;
-	public String author;
+	public String createdby;
 	public String calendarName;
+	public ArrayList<String> start;
+	public ArrayList<String> end;
 	
-	public String getCalendarName() {
-		return calendarName;
-	}
-	public void setCalendarName(String calendarName) {
-		this.calendarName = calendarName;
-	}
 	public String getOverallID() {
 		return overallID;
 	}
 	public void setOverallID(String overallID) {
 		this.overallID = overallID;
 	}
-	public String getName() {
-		return name;
+	public String getType() {
+		return type;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getEventName() {
+		return eventName;
+	}
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getLocation() {
 		return location;
@@ -35,24 +45,32 @@ public class CreateEventObject implements java.io.Serializable
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public String getTimeStart() {
-		return timeStart;
+	public String getCreatedby() {
+		return createdby;
 	}
-	public void setTimeStart(String timeStart) {
-		this.timeStart = timeStart;
+	public void setCreatedby(String createdby) {
+		this.createdby = createdby;
 	}
-	public String getTimeFinished() {
-		return timeFinished;
+	public String getCalendarName() {
+		return calendarName;
 	}
-	public void setTimeFinished(String timeFinished) {
-		this.timeFinished = timeFinished;
+	public void setCalendarName(String calendarName) {
+		this.calendarName = calendarName;
 	}
-	public String getAuthor() {
-		return author;
+	public ArrayList<String> getStart() {
+		return start;
 	}
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setStart(ArrayList<String> start) {
+		this.start = start;
 	}
+	public ArrayList<String> getEnd() {
+		return end;
+	}
+	public void setEnd(ArrayList<String> end) {
+		this.end = end;
+	}
+	
+	
 
 	
 }
