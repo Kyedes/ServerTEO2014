@@ -63,7 +63,7 @@ public class GetCalendar{
 				alEnd.add(stringEndDate + "" + stringEndTime);
 				
 				
-				System.out.println(String.valueOf(startDate.getTime()));
+//				System.out.println(String.valueOf(startDate.getTime()));
 				
 				calendar.add(new Event(stringEventID, stringEventID, stringType, stringType, stringLocation, stringLocation,stringCreatedby, alStart, alEnd));
 				

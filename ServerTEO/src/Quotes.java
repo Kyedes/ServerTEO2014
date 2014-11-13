@@ -119,7 +119,7 @@ public class Quotes {
 	     	if(timeSinceUpdate > 864000){
 	     		// return fresh weather data
 	     		saveQuote();	
-	     	} 
+	     	}
 	     }
   	
 }

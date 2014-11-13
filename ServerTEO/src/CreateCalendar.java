@@ -84,7 +84,7 @@ public class CreateCalendar extends Model{
 		
 		resultSet = queryBuilder.selectFrom(dbConfig.getCalendar()).where("name", "=", newCalenderName).ExecuteQuery();
 				
-		while(resultSet.next())
+		if(resultSet.next())
 		{
 			doesExist = true;
 		}
