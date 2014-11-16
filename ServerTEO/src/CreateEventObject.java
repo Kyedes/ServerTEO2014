@@ -1,5 +1,10 @@
 import java.util.ArrayList;
-
+/**
+ * CreateEventObject is a transfer object class to transfer information to the server.
+ * It contains the necessary information to execute the operation.
+ * @author Esben
+ *
+ */
 
 public class CreateEventObject implements java.io.Serializable
 

@@ -1,23 +1,37 @@
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import com.google.gson.Gson;
-
-import model.Model;
 import model.QueryBuild.*;
-
-public class CreateCalendar extends Model{
+/**
+ * The CreateCalendar Class is responsible for creating new calendars in the server database.
+ * 
+ * @author Esben
+ *
+ */
+public class CreateCalendar{
 	private DatabaseTableConfigurations dbConfig = new DatabaseTableConfigurations();
 	private QueryBuilder queryBuilder = new QueryBuilder();
 	private Gson gson = new Gson();
+	private ResultSet resultSet;
+	private CreateCalendarReturnObject ccro = new CreateCalendarReturnObject();//The object to be returned as a String
+	private String answer = ""; // the String to be returned
+	private boolean created = false; //To notify if the calendar is created
+	private String message;// The description of what has happened
+	boolean doesExist = false;
+	
+	/**
+	 * The execute method uses the information in the incoming object to create a new calendar.
+	 * It needs to make sure that the new calendar has a unique name.
+	 * It then creates a new calendar and sets all the parameters for the new calendar.
+	 * It also sets author and user rights for the calendar.
+	 * @param createCalendarObject
+	 * @return
+	 * @throws SQLException
+	 */
 	
 	public String execute(CreateCalendarObject createCalendarObject) throws SQLException{
-		String answer = "";
 		
-		boolean created = false;
-		String message;
-		CreateCalendarReturnObject ccro = new CreateCalendarReturnObject();
-		
-		boolean doesExist = authenticateNewCalender(createCalendarObject.getCalendarName());
+		doesExist = authenticateNewCalender(createCalendarObject.getCalendarName());
 		
 		if (doesExist == false){
 			String [] keys = {"calendarName","imported","privatePublic"};
@@ -33,7 +47,7 @@ public class CreateCalendar extends Model{
 			
 			String newCalendarID = queryBuilder.selectFrom("calendars").where("calendarname", "=", createCalendarObject.getCalendarName()).ExecuteQuery().getString("calendarid");
 			
-			for(String n : createCalendarObject.getUsers())//sets initial supscibers for the new calendar
+			for(String n : createCalendarObject.getUsers())//sets initial subscribers for the new calendar
 			{
 				
 				String[] keysUser = {"userid", "calendarid"};
@@ -78,6 +92,14 @@ public class CreateCalendar extends Model{
 		return answer;
 	}
 	
+	/**
+	 * The authenticateNewCalender method cheks the database for an existing calendar with an identical name.
+	 * @param newCalenderName
+	 * @return
+	 * @throws SQLException
+	 */
+	
+	// Why is this needed??? because the name is used to couple the user and calendar. But this might be avoided?
 	public boolean authenticateNewCalender(String newCalenderName) throws SQLException
 	{
 		boolean doesExist = false;

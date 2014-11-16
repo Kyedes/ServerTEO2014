@@ -1,8 +1,17 @@
 import java.util.ArrayList;
 
+/**
+ * CreateCalendarObject is a transfer object class to transfer information to the server.
+ * It contains the necessary information to execute the operation.
+ * @author Esben
+ *
+ */
 
 public class CreateCalendarObject implements java.io.Serializable
 {
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = -580896570793664110L;
 	private String overallID = "deleteEvent";
 	private String calendarName;
@@ -23,11 +32,7 @@ public class CreateCalendarObject implements java.io.Serializable
 	public void setAuthors(ArrayList<String> authors) {
 		this.authors = authors;
 	}
-	
-	
-
-	
-	
+			
 	public String getPrivatePublic() {
 		return privatePublic;
 	}

@@ -1,4 +1,9 @@
-
+/**
+ * DeleteEventObject is a transfer object class to transfer information to the server.
+ * It contains the necessary information to execute the operation.
+ * @author Esben
+ *
+ */
 public class DeleteEventObject implements java.io.Serializable{
 	
 	private static final long serialVersionUID = -4749520182118516370L;

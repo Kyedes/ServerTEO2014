@@ -45,7 +45,7 @@ public class GiantSwitch {
 		 ** LOGIN **
 		 **********/
 		case "logIn":
-			LogInObject logInObject = gson.fromJson(jsonString, LogInObject.class);
+			LogInObject logInObject = (LogInObject) gson.fromJson(jsonString, LogInObject.class);
 			LogIn logIn = new LogIn();
 			answer = logIn.execute(logInObject);
 			
@@ -63,7 +63,7 @@ public class GiantSwitch {
 		 ** CALENDAR **
 		 *************/
 		case "createcalendar":
-			CreateCalendarObject createCalendarObject = (CreateCalendarObject)gson.fromJson(jsonString, CreateCalendarObject.class);
+			CreateCalendarObject createCalendarObject = (CreateCalendarObject) gson.fromJson(jsonString, CreateCalendarObject.class);
 			CreateCalendar createCalendar = new CreateCalendar();
 			answer = createCalendar.execute(createCalendarObject);
 			
@@ -84,7 +84,7 @@ public class GiantSwitch {
 //			break;
 			
 		case "getcalendar":
-			GetCalendarObject getCalendarObject = gson.fromJson(jsonString, GetCalendarObject.class);
+			GetCalendarObject getCalendarObject = (GetCalendarObject) gson.fromJson(jsonString, GetCalendarObject.class);
 			GetCalendar getCalendar = new GetCalendar();
 			answer = getCalendar.execute(getCalendarObject);
 			
@@ -96,7 +96,7 @@ public class GiantSwitch {
 //			break;
 
 		case "createEvent":
-			CreateEventObject createEventObject = gson.fromJson(jsonString, CreateEventObject.class);
+			CreateEventObject createEventObject = (CreateEventObject) gson.fromJson(jsonString, CreateEventObject.class);
 			CreateEvent createEvent = new CreateEvent();
 			answer = createEvent.execute(createEventObject);
 //			System.out.println("Recieved saveEvent");
@@ -107,28 +107,28 @@ public class GiantSwitch {
 //			break;
 			
 		case "deleteEvent":
-			DeleteEventObject deleteEO = gson.fromJson(jsonString, DeleteEventObject.class);
+			DeleteEventObject deleteEO = (DeleteEventObject) gson.fromJson(jsonString, DeleteEventObject.class);
 			DeleteEvent deleteE = new DeleteEvent();
 			answer = deleteE.execute(deleteEO);
 //			System.out.println("Recieved deleteEvent");
 			break;
 		
 		case "saveNote":
-			SaveNoteObject saveNoteObject = gson.fromJson(jsonString, SaveNoteObject.class);
+			SaveNoteObject saveNoteObject = (SaveNoteObject) gson.fromJson(jsonString, SaveNoteObject.class);
 			SaveNote saveNote = new SaveNote();
 			answer = saveNote.execute(saveNoteObject);
 //			System.out.println("Recieved saveNote");
 			break;
 
 		case "getNote":
-			GetNoteObject getNoteObject = gson.fromJson(jsonString, GetNoteObject.class);
+			GetNoteObject getNoteObject = (GetNoteObject) gson.fromJson(jsonString, GetNoteObject.class);
 			GetNote getNote = new GetNote();
 			answer = getNote.execute(getNoteObject);
 //			System.out.println("Recieved getNote");
 			break;
 			
 		case "deleteNote":
-			DeleteNoteObject deleteNoteObject = gson.fromJson(jsonString, DeleteNoteObject.class);
+			DeleteNoteObject deleteNoteObject = (DeleteNoteObject) gson.fromJson(jsonString, DeleteNoteObject.class);
 			DeleteNote deleteNote = new DeleteNote();
 			answer = deleteNote.execute(deleteNoteObject);
 //			System.out.println("Recieved deleteNote");

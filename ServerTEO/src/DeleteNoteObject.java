@@ -1,4 +1,9 @@
-
+/**
+ * DeleteNoteObject is a transfer object class to transfer information to the server.
+ * It contains the necessary information to execute the operation.
+ * @author Esben
+ *
+ */
 public class DeleteNoteObject implements java.io.Serializable{
 	
 	private static final long serialVersionUID = 1026261677650219409L;
