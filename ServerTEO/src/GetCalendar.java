@@ -3,8 +3,6 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
-
-import model.Model;
 import model.QueryBuild.*;
 
 import com.google.gson.*;
@@ -12,31 +10,33 @@ import com.google.gson.*;
 public class GetCalendar{
 	
 	private QueryBuilder qBuilder = new QueryBuilder();
+	private ImportCalendarData icd = new ImportCalendarData();
 	private ResultSet resultSet2;
 	private ResultSet resultSet;
 	private ArrayList<ArrayList<Event>> calendars;
 	private ArrayList<Event> calendar;
 	private Gson gson = new GsonBuilder().create();
-	
+		
 	
 	public String execute (GetCalendarObject gcObject) throws SQLException{
 		
 		String answer = "";
 		
-		String [] valuesCalendars = {"calendarID"};
+		icd.importCalendar(gcObject.getUserID());
 		
-		resultSet = qBuilder.selectFrom(valuesCalendars, "Subsciption").where("userID", "=", gcObject.getUserID()).ExecuteQuery();
+		resultSet = qBuilder.selectFrom(new String [] {"calendarID"}, "Subsciption").where("userID", "=", gcObject.getUserID()).ExecuteQuery();
 		
-		while(resultSet.next()){
+		while (resultSet.next()){
+			
 			resultSet2 = qBuilder.selectFrom("Events").where("calendarID", "=", resultSet.getString("calendarID")).ExecuteQuery();
 			
 			while (resultSet2.next()){
 				
-				int eventID = resultSet2.getInt("eventid");
-				int type = resultSet2.getInt("type");
-				int location = resultSet2.getInt("location");
-				int createdby = resultSet2.getInt("createdby");
-				
+				String calendarID = resultSet2.getString("calendarid");
+				String eventID = resultSet2.getString("eventid");
+				String type = resultSet2.getString("type");
+				String eventName = resultSet2.getString("eventName");
+				String description = resultSet2.getString("description");
 				
 				Date startDate = resultSet2.getDate("start");
 				Time startTime = resultSet2.getTime("start");
@@ -44,13 +44,8 @@ public class GetCalendar{
 				Date endDate = resultSet2.getDate("end");
 				Time endTime = resultSet2.getTime("end");
 				
-//				String nameEvent = resultSet2.getString("name");
-//				String text = resultSet2.getString("text");
+				String location = resultSet2.getString("location");
 				
-				String stringEventID = String.valueOf(eventID);
-				String stringType = String.valueOf(type);
-				String stringLocation = String.valueOf(location);
-				String stringCreatedby = String.valueOf(createdby);
 				String stringStartDate = String.valueOf(startDate);
 				String stringStartTime = String.valueOf(startTime);				
 				String stringEndDate = String.valueOf(endDate);
@@ -65,7 +60,7 @@ public class GetCalendar{
 				
 //				System.out.println(String.valueOf(startDate.getTime()));
 				
-				calendar.add(new Event(stringEventID, stringEventID, stringType, stringType, stringLocation, stringLocation,stringCreatedby, alStart, alEnd));
+				calendar.add(new Event(calendarID, eventID, type, eventName, description, alStart, alEnd, location));
 				
 			}
 			calendars.add(calendar);

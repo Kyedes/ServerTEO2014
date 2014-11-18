@@ -141,8 +141,9 @@ public class GiantSwitch {
 
 			Quotes quotes = new Quotes();
 			
-		answer = quotes.getQuote();
-			System.out.println(answer);
+			answer = quotes.getQuote();
+			
+//			System.out.println(answer);
 			
 			break;
 

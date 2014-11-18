@@ -14,7 +14,7 @@ public class CreateEvent {
 	private ResultSet resultSet;
 	private CreateEventReturnObject cero;
 	private Gson gson = new Gson();
-	
+
 	/**
 	 * The execute method uses the QueryBuilder to create an event, of the provided information, in the database provided that a event with the same name does not already exist in the same calendar.
 	 * it returns the Json string of the return object telling whether the event has been created; and if not, why.
@@ -24,25 +24,43 @@ public class CreateEvent {
 	 */
 	public String execute(CreateEventObject ceo) throws SQLException{
 		String answer = "";
-	
-		resultSet = qb.selectFrom(new String [] {"calendarname"},"events").where("calendarname", "=", ceo.getCalendarName()).ExecuteQuery();
 		
-		if(resultSet.next() == false){
+		resultSet = qb.selectFrom(new String [] {"calendarname"},"calendars").where("calendarname", "=", ceo.getCalendarName()).ExecuteQuery();
+		
+		String[] fields = {
+				"eventName", 
+				"description", 
+				"location", 
+				"createdBy", 
+				"calendarname", 
+				"startDate", 
+				"startTime", 
+				"endDate", 
+				"endTime", 
+		};
+		
+		String[] values = {
+				ceo.getEventName(),
+				ceo.getDescription(),
+				ceo.getLocation(), 
+				ceo.getCreatedby(), 
+				ceo.getCalendarName(), 
+				ceo.getStartDate(),
+				ceo.getStartTime(), 
+				ceo.getEndDate(),
+				ceo.getEndTime()
+		};
+		
+		if (resultSet.next()){
 			
-			String[] fields = {"eventName", "description", "location", "createdBy", "calendarname", "startDate", "startTime", "endDate", "endTime", };
-			
-			String[] values = {ceo.getEventName(),ceo.getDescription(),ceo.getLocation(), ceo.getCreatedby(), ceo.getCalendarName(), ceo.getStartDate(),ceo.getStartTime(), ceo.getEndDate(),ceo.getEndTime()};
-			
-			//use the boolean???
-			qb.insertInto("events", fields).values(values).Execute();
+			qb.insertInto("events", fields).values(values).Execute();//use the boolean???
 			
 			cero.setCreated(true);
 			cero.setMessage("the event " + ceo.getEventName() + " has been created" );
 			
-			
 		}else{
 			cero.setCreated(false);
-			cero.setMessage("An event with this name already exists in this calendar");
+			cero.setMessage("The associated calendar does not exist");
 		}
 		
 		answer = (String) gson.toJson(cero);

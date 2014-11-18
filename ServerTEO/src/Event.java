@@ -11,10 +11,9 @@ public class Event {
     private String type;
     private String title;
     private String description;
-    private String location;
-    private String createdby;
     private ArrayList<String> start;
     private ArrayList<String> end;
+    private String location;
 
     // Settere og gettere for Event objektet 
     public void setActivityid(String activityid){
@@ -58,14 +57,6 @@ public class Event {
     public String getLocation(){
         return location;
     }
-
-    public void setCreatedby(String createdby){
-        this.createdby = createdby;
-    }
-    public String getCreatedby(){
-        return createdby;
-    }
-    
     public void setStart(ArrayList<String> start){
         this.start = start;
     }
@@ -80,18 +71,17 @@ public class Event {
         return end;
     }
 	public Event(String activityid, String eventid, String type, String title,
-			String description, String location, String createdby, ArrayList<String> start,
-			ArrayList<String> end) {
+			String description,  ArrayList<String> start,
+			ArrayList<String> end, String location) {
 		super();
 		this.activityid = activityid;
 		this.eventid = eventid;
 		this.type = type;
 		this.title = title;
 		this.description = description;
-		this.location = location;
-		this.createdby = createdby;
 		this.start = start;
 		this.end = end;
+		this.location = location;
 	}
     
     

@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.QueryBuild.QueryBuilder;
 
@@ -18,7 +20,8 @@ public class ImportCalendarData {
 	private Gson gson = new Gson();
 	private ResultSet resultSet;
 	//henter data fra URL og l??er ind til en string
-    private static String readUrl(String urlString) throws Exception {
+    
+	private static String readUrl(String urlString) throws Exception {
         BufferedReader reader = null;
         try {
             URL url = new URL(urlString);
@@ -35,6 +38,7 @@ public class ImportCalendarData {
                 reader.close();
         }
     }
+	
     //Nu har vi alle data liggende i en string (JSON). 
     //Saa bruger vi Google's udviklede library Json string. den kan lave det om til java objekter
     //Events laver en arraylist af Event
@@ -43,15 +47,20 @@ public class ImportCalendarData {
      * Allows client to retrieve CBS's calendar and then access it.
      * @throws Exception
      */
-    public Events getDataFromCalendar(String userID) throws Exception {
+    public void importCalendar(String userID) throws SQLException {
 
         /**
          * Get URL From calendar.cbs.dk -> Subscribe -> change URL to end with .json
          * Encrypt hash from
          */
     	String key = e.crypt(userID + e.getHASHKEY());
-        String json = readUrl("http://calendar.cbs.dk/events.php/"+userID+"/"+key+".json");
-
+        String json = "";
+		try {
+			json = readUrl("http://calendar.cbs.dk/events.php/"+userID+"/"+key+".json");
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		
         Events events = (Events) gson.fromJson(json, Events.class);
         
         for(Event e : events.getEvents()){
@@ -69,9 +78,13 @@ public class ImportCalendarData {
         		String[] values = {
         				e.getActivityid(),
         				"1",
-        				"1"   
+        				"1"
         		};
         		qb.insertInto("calendars", fields).values(values).Execute();
+        		
+        		//Subscriping user to calenders
+        		qb.insertInto("subscription", new String[] {"calendarID", "userID"}).values(new String[] {e.getActivityid(), userID}).Execute();
+        		
         	}
         	
         	resultSet = qb.selectFrom("events").where("eventID", "=", e.getEventid()).ExecuteQuery();
@@ -86,15 +99,16 @@ public class ImportCalendarData {
     				"end",
     				"location"
     		};
+        	
     		String[] values = {
     				e.getActivityid(),
     				e.getEventid(),
     				e.getType(),
     				e.getTitle(),
     				e.getDescription(),
-    				e.getStart().toString(),//TODO skal testes og måske laves om, Husk databasen
-    				e.getEnd().toString(),
-    				e.getLocation()        				  
+    				arrayToString(e.getStart()),
+    				arrayToString(e.getEnd()),
+    				e.getLocation()
     		};
         	        	
         	if(resultSet.next()){
@@ -104,11 +118,24 @@ public class ImportCalendarData {
         	}
         }
 
-        return events;
-
         //tester events activityID's
 //        for (int i = 0; i < events.getEvents().size(); i++){
 //            System.out.println(events.getEvents().get(i).getActivityid());
 //        }
+    }
+    
+    public String arrayToString(ArrayList<String> aL){
+    	String answer = "";
+    	
+    	for (int i = 0; i < aL.size(); i++){
+    		answer += aL.get(i); 
+			if((i+1) == aL.size()){
+				
+			}else{
+				answer += ", ";
+			}
+    	}
+    	
+    	return answer;
     }
 }

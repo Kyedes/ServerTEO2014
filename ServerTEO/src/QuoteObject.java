@@ -9,13 +9,17 @@ public class QuoteObject {
 
 	private String quote;
 	private String author;
-	private String topic;
+	private String subject;
 	
-	public QuoteObject(String quote, String author, String topic) {
+	public QuoteObject(){
+		
+	}
+	
+	public QuoteObject(String quote, String author, String subject) {
 		super();
 		this.quote = quote;
 		this.author = author;
-		this.topic = topic;
+		this.subject = subject;
 	}
 	public String getQuote() {
 		return quote;
@@ -29,11 +33,11 @@ public class QuoteObject {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public String getTopic() {
-		return topic;
+	public String getSubject() {
+		return subject;
 	}
-	public void setTopic(String topic) {
-		this.topic = topic;
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 	
 	
