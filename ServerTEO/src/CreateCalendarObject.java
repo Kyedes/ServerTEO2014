@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class CreateCalendarObject implements java.io.Serializable
 {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -580896570793664110L;
 	private String overallID = "deleteEvent";
@@ -57,5 +57,13 @@ public class CreateCalendarObject implements java.io.Serializable
 //	public void setImported(boolean imported) {
 //		this.imported = imported;
 //	}
-
+	public CreateCalendarObject(String calendarName, String privatePublic,
+			ArrayList<String> users, ArrayList<String> authors) {
+		super();
+		this.calendarName = calendarName;
+		this.privatePublic = privatePublic;
+		this.users = users;
+		this.authors = authors;
+	}
+	
 }

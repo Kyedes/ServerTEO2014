@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 /**
  * CreateEventObject is a transfer object class to transfer information to the server.
  * It contains the necessary information to execute the operation.
@@ -11,14 +11,16 @@ public class CreateEventObject implements java.io.Serializable
 {
 	private static final long serialVersionUID = 603624733895783558L;
 	private String overallID = "createEvent";
-	public String type;
-	public String eventName;
+	private String type;
+	private String eventName;
 	private String description;
-	public String location;
-	public String createdby;
-	public String calendarName;
-	public ArrayList<String> start;
-	public ArrayList<String> end;
+	private String location;
+	private String createdby;
+	private String calendarName;
+	private String startDate;
+	private String startTime;
+	private String endDate;
+	private String endTime;
 	
 	public String getOverallID() {
 		return overallID;
@@ -62,18 +64,31 @@ public class CreateEventObject implements java.io.Serializable
 	public void setCalendarName(String calendarName) {
 		this.calendarName = calendarName;
 	}
-	public ArrayList<String> getStart() {
-		return start;
+	public String getStartDate() {
+		return startDate;
 	}
-	public void setStart(ArrayList<String> start) {
-		this.start = start;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
-	public ArrayList<String> getEnd() {
-		return end;
+	public String getStartTime() {
+		return startTime;
 	}
-	public void setEnd(ArrayList<String> end) {
-		this.end = end;
+	public void setStartTime(String stratTime) {
+		this.startTime = stratTime;
 	}
+	public String getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+	
 	
 	
 

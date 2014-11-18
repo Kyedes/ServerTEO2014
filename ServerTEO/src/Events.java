@@ -14,9 +14,13 @@ import model.QueryBuild.QueryBuilder;
  * Den laver selve arrayet af alle generede Event
  */
 public class Events {
-    ArrayList<Event> events = new ArrayList<Event>();
+    private ArrayList<Event> events = new ArrayList<Event>();
 
     public ArrayList<Event> getEvents() {
+		return events;
+	}
+
+	public ArrayList<Event> getEventsFromDataBase() {
     	QueryBuilder qb = new QueryBuilder();
     	try {
 			ResultSet rs = qb.selectFrom("events").all().ExecuteQuery();

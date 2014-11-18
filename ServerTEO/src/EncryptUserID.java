@@ -12,7 +12,6 @@ public class EncryptUserID {
      * Constant cipher seed - DO NOT CHANGE.
      * http://www.miraclesalad.com/webtools/md5.php - Du kan her saette userid foerst og derefter hashkey for at teste
      */
-	//TODO ændre bruger til genrel bruger
     private final String HASHKEY = "v.eRyzeKretW0r_t";
     private String key;
     private static MessageDigest digester;
@@ -45,12 +44,13 @@ public class EncryptUserID {
     }
 
     //Quick example of how to get the hash.
-//    public static void main(String[] args) {
-//
-//        System.out.print("Secret key: " + crypt(userId + HASHKEY));
+    public static void main(String[] args) {
+    	EncryptUserID cryptU = new EncryptUserID(); 
+    	String userId = "esky13ab";
+        System.out.print("Secret key: " + cryptU.crypt(userId + cryptU.getHASHKEY()));
 //        String key = crypt(userId+ HASHKEY);
-//
-//    }
+
+    }
 
 	public String getKey() {
 		return key;
