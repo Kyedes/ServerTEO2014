@@ -83,7 +83,7 @@ public class GiantSwitch {
 //		case "saveImportedcalendar":
 //			break;
 			
-		case "getcalendar":
+		case "getCalendar":
 			GetCalendarObject getCalendarObject = (GetCalendarObject) gson.fromJson(jsonString, GetCalendarObject.class);
 			GetCalendar getCalendar = new GetCalendar();
 			answer = getCalendar.execute(getCalendarObject);
@@ -193,14 +193,14 @@ public class GiantSwitch {
 			return "logIn";
 		} else if (ID.contains("logOut")) {
 			return "logOut";
-		} else if (ID.contains("getcalendar")) {
-			return "getcalendar";
+		} else if (ID.contains("getCalendar")) {
+			return "getCalendar";
 		} else if (ID.contains("createEvent")) {
 			return "createEvent";
 		} else if (ID.contains("deleteEvent")) {
 			return "deleteEvent"; 
-		} else if (ID.contains("createcalendar")) {
-			return "createcalendar";
+		} else if (ID.contains("createCalendar")) {
+			return "createCalendar";
 		}
 
 		else

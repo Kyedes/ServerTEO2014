@@ -1,5 +1,6 @@
 
 
+import java.sql.SQLException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -11,11 +12,16 @@ public class QuoteTimer {
 	private void quoteDatabaseUpdate(){
 		while (true)
 		{
-			timer.schedule(new TimerTask() {
+			timer.schedule(new TimerTask(){
 				  @Override
-				  public void run() {
+				  public void run(){
 					  
-				  quoteModel.saveQuote();
+				  try {
+					quoteModel.importQuote();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				  }
 				  }
 			, (long)0, (long) 1440*60*1000);

@@ -15,8 +15,9 @@ public class GetCalendar{
 	private ResultSet resultSet;
 	private ArrayList<ArrayList<Event>> calendars;
 	private ArrayList<Event> calendar;
+	
 	private Gson gson = new GsonBuilder().create();
-		
+	private GetCalendarReturnObject gcro = new GetCalendarReturnObject();
 	
 	public String execute (GetCalendarObject gcObject) throws SQLException{
 		
@@ -67,7 +68,9 @@ public class GetCalendar{
 			calendar.clear();
 		}
 		
-		answer = gson.toJson(calendars);
+		gcro.setCalendars(calendars);
+		
+		answer = gson.toJson(gcro);
 			
 		return answer;
 		

@@ -28,6 +28,9 @@ public class Configurations {
     // Opret DB name
     // Opret update time på QOTD
 
+    public Configurations(){
+    	readFile();
+    }
 
     public String getHost() {
         return host;
@@ -117,7 +120,7 @@ public class Configurations {
 
     // Method to read files from jSON file
 
-    public void ReadFile() {
+    public void readFile() {
         JSONParser jsonParser = new JSONParser();
 
         try {
