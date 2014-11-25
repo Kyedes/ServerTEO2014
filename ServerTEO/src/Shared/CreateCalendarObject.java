@@ -14,7 +14,7 @@ public class CreateCalendarObject implements java.io.Serializable
 	 *
 	 */
 	private static final long serialVersionUID = -580896570793664110L;
-	private String overallID = "deleteEvent";
+	private String overallID = "createCalendar";
 	private String calendarName;
 	private String privatePublic;
 	private ArrayList<String> users;
