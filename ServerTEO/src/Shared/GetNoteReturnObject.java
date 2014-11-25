@@ -1,3 +1,4 @@
+package Shared;
 
 public class GetNoteReturnObject implements java.io.Serializable{
 	/**

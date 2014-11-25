@@ -1,5 +1,8 @@
 import java.sql.SQLException;
 
+import Shared.DeleteNoteObject;
+import Shared.DeleteNoteReturnObject;
+
 import com.google.gson.Gson;
 
 import model.QueryBuild.QueryBuilder;

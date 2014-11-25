@@ -8,6 +8,21 @@ import java.sql.SQLException;
 //import JsonClasses.Createcalendar;
 //import JsonClasses.Deletecalendar;
 
+
+
+
+
+
+
+
+import Shared.CreateCalendarObject;
+import Shared.DeleteCalendarObject;
+import Shared.DeleteEventObject;
+import Shared.DeleteNoteObject;
+import Shared.GetCalendarObject;
+import Shared.GetNoteObject;
+import Shared.SaveNoteObject;
+
 import com.google.gson.*;
 
 //import databaseMethods.SwitchMethods;

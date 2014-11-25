@@ -1,5 +1,7 @@
 
 
+import Shared.Event;
+
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -59,6 +61,7 @@ public class ImportCalendarData extends Model{
 		Events events = (Events) gson.fromJson(json, Events.class);
 
 		for(Event e : events.getEvents()){
+//			qb = new QueryBuilder();//prøver at instansiere en ny qb for hver event for at forhindre for mange forbindelser
 
 			saveCalendar(e);//calls the method to save the calendar
 
@@ -76,7 +79,7 @@ public class ImportCalendarData extends Model{
 	/**
 	 * Get URL From calendar.cbs.dk -> Subscribe -> change URL to end with .json
 	 * Encrypt hash from
-	 */    
+	 */
 	public String fromCBSCalendar(String userName){
 		String key = e.crypt(userName + e.getHASHKEY());
 		json = "";

@@ -1,6 +1,11 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import Shared.SaveNoteObject;
+import Shared.SaveNoteReturnObject;
+
 import com.google.gson.Gson;
+
 import model.QueryBuild.QueryBuilder;
 
 public class SaveNote{

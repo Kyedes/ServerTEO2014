@@ -1,3 +1,4 @@
+package Shared;
 /**
  * GetCalendarObject is a transfer object class to transfer information to the server.
  * It contains the necessary information to execute the operation.

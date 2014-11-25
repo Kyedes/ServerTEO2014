@@ -1,3 +1,4 @@
+package Shared;
 
 public class DeleteNoteReturnObject implements java.io.Serializable{
 	/**

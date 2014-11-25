@@ -1,5 +1,10 @@
 import java.sql.SQLException;
+
+import Shared.GetNoteObject;
+import Shared.GetNoteReturnObject;
+
 import com.google.gson.Gson;
+
 import model.Model;
 import model.QueryBuild.QueryBuilder;
 

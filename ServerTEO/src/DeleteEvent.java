@@ -1,5 +1,8 @@
 import java.sql.SQLException;
 
+import Shared.DeleteEventObject;
+import Shared.DeleteEventReturnObject;
+
 import com.google.gson.Gson;
 
 import model.Model;

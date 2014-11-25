@@ -1,6 +1,8 @@
 
 import java.util.ArrayList;
 
+import Shared.Event;
+
 //import java.sql.ResultSet;
 //import java.sql.SQLException;
 //import java.sql.Time;
