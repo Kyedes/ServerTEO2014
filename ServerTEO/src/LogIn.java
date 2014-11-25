@@ -1,5 +1,8 @@
 import java.sql.SQLException;
 
+import Shared.LogInObject;
+import Shared.LogInReturnObject;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

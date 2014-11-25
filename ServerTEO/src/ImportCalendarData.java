@@ -59,21 +59,24 @@ public class ImportCalendarData extends Model{
 		json = fromCBSCalendar(userName);
 
 		Events events = (Events) gson.fromJson(json, Events.class);
+		
+			for(Event e : events.getEvents()){
+				//			qb = new QueryBuilder();//prøver at instansiere en ny qb for hver event for at forhindre for mange forbindelser
 
-		for(Event e : events.getEvents()){
-//			qb = new QueryBuilder();//prøver at instansiere en ny qb for hver event for at forhindre for mange forbindelser
+				saveCalendar(e);//calls the method to save the calendar
 
-			saveCalendar(e);//calls the method to save the calendar
+				//Subscriping user to calenders
+				if(isSubscribed(e, userName) == false){
 
-			//Subscriping user to calenders
-			if(isSubscribed(e, userName) == false){
-
-				qb.insertInto("subscription", new String[] {"calendarID", "userID"}).values(new String[] {calendarID, userID}).Execute();
+					qb.insertInto("subscription", new String[] {"calendarID", "userID"}).values(new String[] {calendarID, userID}).Execute();
+				}
+				try {
+				saveEvent(e);//saves the current event to the database
+				}catch(SQLException ex){
+					
+				}
 			}
-
-			saveEvent(e);//saves the current event to the database
-
-		}
+		
 	}
 
 	/**
@@ -190,13 +193,16 @@ public class ImportCalendarData extends Model{
 		String answer = "";
 
 		for (int i = 0; i < aL.size(); i++){
+
 			answer += aL.get(i); 
+
 			if(i < 2){
 				answer += "-";
 			}
 			if(i == 2){
 				answer += " ";
 			}
+
 			if (i > 2 && (i+1) != aL.size() && (i+1) < 6){
 				answer += ":";
 			}

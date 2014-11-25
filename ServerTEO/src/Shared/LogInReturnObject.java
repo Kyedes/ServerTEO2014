@@ -1,3 +1,4 @@
+package Shared;
 
 public class LogInReturnObject implements java.io.Serializable {
 	
