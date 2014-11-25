@@ -1,5 +1,7 @@
 import java.net.Socket;
 
+import Shared.Encryption;
+
 /**
  * This class impliments the Runnable class to be used as a thread.
  * @author Esben
