@@ -59,24 +59,24 @@ public class ImportCalendarData extends Model{
 		json = fromCBSCalendar(userName);
 
 		Events events = (Events) gson.fromJson(json, Events.class);
-		
-			for(Event e : events.getEvents()){
-				//			qb = new QueryBuilder();//prøver at instansiere en ny qb for hver event for at forhindre for mange forbindelser
 
-				saveCalendar(e);//calls the method to save the calendar
+		for(Event e : events.getEvents()){
+			//			qb = new QueryBuilder();//prøver at instansiere en ny qb for hver event for at forhindre for mange forbindelser
 
-				//Subscriping user to calenders
-				if(isSubscribed(e, userName) == false){
+			saveCalendar(e);//calls the method to save the calendar
 
-					qb.insertInto("subscription", new String[] {"calendarID", "userID"}).values(new String[] {calendarID, userID}).Execute();
-				}
-				try {
-				saveEvent(e);//saves the current event to the database
-				}catch(SQLException ex){
-					
-				}
+			//Subscriping user to calenders
+			if(isSubscribed(e, userName) == false){
+
+				qb.insertInto("subscription", new String[] {"calendarID", "userID"}).values(new String[] {calendarID, userID}).Execute();
 			}
-		
+			try {
+				saveEvent(e);//saves the current event to the database
+			}catch(SQLException ex){
+
+			}
+		}
+
 	}
 
 	/**

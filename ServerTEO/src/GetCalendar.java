@@ -29,7 +29,7 @@ public class GetCalendar{
 		
 		icd.importCalendar(gcObject.getUserID());
 		
-		resultSet = qBuilder.selectFrom(new String [] {"calendarID"}, "Subsciption").where("userID", "=", gcObject.getUserID()).ExecuteQuery();
+		resultSet = qBuilder.selectFrom(new String [] {"calendarID"}, "Subscription").where("userID", "=", gcObject.getUserID()).ExecuteQuery();
 		
 		while (resultSet.next()){
 			
@@ -40,7 +40,7 @@ public class GetCalendar{
 				String calendarID = resultSet2.getString("calendarid");
 				String eventID = resultSet2.getString("eventid");
 				String type = resultSet2.getString("type");
-				String eventName = resultSet2.getString("eventName");
+				String eventName = resultSet2.getString("eventname");
 				String description = resultSet2.getString("description");
 				
 				Date startDate = resultSet2.getDate("start");
@@ -66,13 +66,18 @@ public class GetCalendar{
 //				System.out.println(String.valueOf(startDate.getTime()));
 				
 				calendar.add(new Event(calendarID, eventID, type, eventName, description, alStart, alEnd, location));
-				
+				alStart.clear();
+				alEnd.clear();
 			}
 			calendars.add(calendar);
 			calendar.clear();
 		}
 		
 		gcro.setCalendars(calendars);
+		
+		for (ArrayList<Event> i : calendars){
+			System.out.print(i.size());
+		}
 		
 		answer = gson.toJson(gcro);
 			
