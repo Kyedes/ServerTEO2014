@@ -29,7 +29,12 @@ public class GetCalendar{
 		
 		icd.importCalendar(gcObject.getUserID());
 		
-		resultSet = qBuilder.selectFrom(new String [] {"calendarID"}, "Subscription").where("userID", "=", gcObject.getUserID()).ExecuteQuery();
+		resultSet = qBuilder.selectFrom("users").where("username", "=", gcObject.getUserID()).ExecuteQuery();
+		resultSet.next();
+		
+		String userID = resultSet.getString("userid");
+		
+		resultSet = qBuilder.selectFrom(new String [] {"calendarID"}, "Subscription").where("userID", "=", userID).ExecuteQuery();
 		
 		while (resultSet.next()){
 			
