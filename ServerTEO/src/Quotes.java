@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+import shared.QuoteObject;
 import model.QueryBuild.QueryBuilder;
-import Shared.QuoteObject;
 
 import com.google.gson.Gson;
 

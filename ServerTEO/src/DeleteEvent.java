@@ -1,7 +1,7 @@
 import java.sql.SQLException;
 
-import Shared.DeleteEventObject;
-import Shared.DeleteEventReturnObject;
+import shared.DeleteEventObject;
+import shared.DeleteEventReturnObject;
 
 import com.google.gson.Gson;
 

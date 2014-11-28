@@ -1,8 +1,8 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import Shared.SaveNoteObject;
-import Shared.SaveNoteReturnObject;
+import shared.SaveNoteObject;
+import shared.SaveNoteReturnObject;
 
 import com.google.gson.Gson;
 

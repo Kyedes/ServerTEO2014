@@ -1,8 +1,8 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import Shared.CreateCalendarObject;
-import Shared.CreateCalendarReturnObject;
+import shared.CreateCalendarObject;
+import shared.CreateCalendarReturnObject;
 
 import com.google.gson.Gson;
 

@@ -1,8 +1,8 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import Shared.CreateEventObject;
-import Shared.CreateEventReturnObject;
+import shared.CreateEventObject;
+import shared.CreateEventReturnObject;
 
 import com.google.gson.Gson;
 

@@ -1,7 +1,5 @@
 
 
-import Shared.Event;
-
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -11,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import shared.Event;
 import model.Model;
 import model.QueryBuild.QueryBuilder;
 

@@ -1,13 +1,13 @@
 import java.sql.SQLException;
 
-import Shared.DeleteNoteObject;
-import Shared.DeleteNoteReturnObject;
-
 import com.google.gson.Gson;
 
 import model.QueryBuild.QueryBuilder;
 
 import java.sql.ResultSet;
+
+import shared.DeleteNoteObject;
+import shared.DeleteNoteReturnObject;
 
 public class DeleteNote {
 	private boolean deleted;

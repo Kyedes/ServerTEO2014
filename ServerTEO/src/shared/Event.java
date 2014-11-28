@@ -1,4 +1,4 @@
-package Shared;
+package shared;
 import java.util.ArrayList;
 
 /**
@@ -74,7 +74,7 @@ public class Event {
 	public Event(String activityid, String eventid, String type, String title,
 			String description,  ArrayList<String> start,
 			ArrayList<String> end, String location) {
-		super();
+		
 		this.activityid = activityid;
 		this.eventid = eventid;
 		this.type = type;
@@ -84,7 +84,8 @@ public class Event {
 		this.end = end;
 		this.location = location;
 	}
-    
-    
-
+	
+	public Event(){
+		
+	}
 }

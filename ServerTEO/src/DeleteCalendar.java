@@ -1,6 +1,6 @@
 import java.sql.SQLException;
 
-import Shared.DeleteCalendarObject;
+import shared.DeleteCalendarObject;
 import model.Model;
 import model.QueryBuild.QueryBuilder;
 

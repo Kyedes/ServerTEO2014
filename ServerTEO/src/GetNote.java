@@ -1,7 +1,7 @@
 import java.sql.SQLException;
 
-import Shared.GetNoteObject;
-import Shared.GetNoteReturnObject;
+import shared.GetNoteObject;
+import shared.GetNoteReturnObject;
 
 import com.google.gson.Gson;
 
