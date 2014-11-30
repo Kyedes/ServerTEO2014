@@ -33,7 +33,7 @@ public class LogIn extends Model{
 		switch (result){
 		case "1":
 			logInRO.setLogOn(false);
-			logInRO.setExplanation("The email or password is incorect.");
+			logInRO.setExplanation("The email or password is incorrect.");
 			break;
 		case "2":
 			logInRO.setLogOn(false);
