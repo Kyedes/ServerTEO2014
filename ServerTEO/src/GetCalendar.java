@@ -91,9 +91,11 @@ public class GetCalendar{
 		
 		gcro.setCalendars(calendars);
 		
-		for (ArrayList<Event> x : calendars){
-			System.out.print(x.size() + "\n");
-		}
+		
+		//Test to see if calendars are being made
+//		for (ArrayList<Event> x : calendars){
+//			System.out.print(x.size() + "\n");
+//		}
 		
 		answer = gson.toJson(gcro);
 		

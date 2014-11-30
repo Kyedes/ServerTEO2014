@@ -59,14 +59,14 @@ public class LogIn extends Model{
 		return answer;
 	}
 
-	public String authenticateUser(String email, String password, boolean isAdmin) throws SQLException {
+	public String authenticateUser(String userName, String password, boolean isAdmin) throws SQLException {
 
-		String[] keys = {"userid", "email", "active", "password"};
+		String[] keys = {"userid", "username", "password"};
 
 		//		qb = new QueryBuilder();
 
 		// Henter info om bruger fra database via querybuilder
-		resultSet = qb.selectFrom(keys, "users").where("email", "=", email).ExecuteQuery();
+		resultSet = qb.selectFrom(keys, "users").where("username", "=", userName).ExecuteQuery();
 
 		// Hvis en bruger med forespurgt email findes
 		if (resultSet.next())
@@ -74,14 +74,15 @@ public class LogIn extends Model{
 			// Hvis passwords matcher
 			if(resultSet.getString("password").equals(password))
 			{
-				// If the user is activ
-				if(resultSet.getBoolean("active"))
-				{
+				// If the user is activ //udkommenteret da funktion ikke i brug, kan evt. bruges senere
+//				if(resultSet.getBoolean("active"))
+//				{
 					String userID = resultSet.getString("userid");
 
 					String[] key = {"type"};
 
 					resultSet = qb.selectFrom(key, "roles").where("userid", "=", userID).ExecuteQuery();
+					resultSet.next();
 
 					// Hvis brugeren baade logger ind og er registreret som admin, eller hvis brugeren baade logger ind og er registreret som bruger
 					if((resultSet.getString("type").equals("admin") && isAdmin) || (resultSet.getString("type").equals("user") && !isAdmin))
@@ -90,10 +91,10 @@ public class LogIn extends Model{
 					} else {
 						return "3"; // returnerer fejlkoden "3" hvis brugertype ikke stemmer overens med loginplatform
 					}
-				} else {
-					return "2"; // returnerer fejlkoden "2" hvis bruger er sat som inaktiv
-					
-				}
+//				} else {
+//					return "2"; // returnerer fejlkoden "2" hvis bruger er sat som inaktiv
+//					
+//				}
 			} else {
 				return "1"; // returnerer fejlkoden "1" hvis email ikke findes eller hvis password og username ikke matcher
 			}

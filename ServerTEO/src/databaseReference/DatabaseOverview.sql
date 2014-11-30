@@ -2,26 +2,20 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 
 /* Drop Tables */
 
-DROP TABLE Weather;
-DROP TABLE AutherRights;
-DROP TABLE Notes;
-DROP TABLE Subscription;
-DROP TABLE Roles;
-DROP TABLE Quote;
-DROP TABLE Users;
-DROP TABLE Events;
-DROP TABLE Calendars;
+DROP TABLE IF EXISTS AutherRights;
+DROP TABLE IF EXISTS Notes;
+DROP TABLE IF EXISTS Events;
+DROP TABLE IF EXISTS Subscription;
+DROP TABLE IF EXISTS Calendars;
+DROP TABLE IF EXISTS Quote;
+DROP TABLE IF EXISTS Roles;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Weather;
 
 
 
 
 /* Create Tables */
-
-CREATE TABLE Weather
-(
-
-);
-
 
 CREATE TABLE AutherRights
 (
@@ -30,69 +24,10 @@ CREATE TABLE AutherRights
 );
 
 
-CREATE TABLE Notes
-(
-	eventID int NOT NULL,
-	noteContent varchar(1023),
-	PRIMARY KEY (eventID)
-);
-
-
-CREATE TABLE Subscription
-(
-	calendarID int NOT NULL,
-	userID int NOT NULL
-);
-
-
-CREATE TABLE Roles
-(
-	-- does this user have admin rights?
-	-- 
-	-- 0 = false
-	-- 1 = true
-	admin varchar(1) COMMENT 'does this user have admin rights?
-
-0 = false
-1 = true',
-	-- does this user have user rights?
-	-- 
-	-- 0 = false
-	-- 1 = true
-	user varchar(1) COMMENT 'does this user have user rights?
-
-0 = false
-1 = true',
-	userID int NOT NULL,
-	PRIMARY KEY (userID)
-);
-
-
-CREATE TABLE Quote
-(
-	QuoteID int NOT NULL AUTO_INCREMENT,
-	quote varchar(511),
-	author varchar(255),
-	subject varchar(255),
-	lastUpdate bigint,
-	PRIMARY KEY (QuoteID)
-);
-
-
-CREATE TABLE Users
-(
-	userID int NOT NULL AUTO_INCREMENT,
-	userName varchar(8),
-	email varchar(255),
-	password varchar(255),
-	PRIMARY KEY (userID)
-);
-
-
 CREATE TABLE Calendars
 (
 	calendarID int NOT NULL AUTO_INCREMENT,
-	calendarName varchar(255) UNIQUE,
+	calendarName varchar(255),
 	-- Can others see this calendar?
 	-- 
 	-- 1 = true
@@ -111,7 +46,8 @@ CREATE TABLE Calendars
 0 = false
 
 1 = true',
-	PRIMARY KEY (calendarID)
+	PRIMARY KEY (calendarID),
+	UNIQUE (calendarName)
 );
 
 
@@ -131,10 +67,99 @@ CREATE TABLE Events
 );
 
 
+CREATE TABLE Notes
+(
+	eventID int NOT NULL,
+	noteContent varchar(1023),
+	PRIMARY KEY (eventID)
+);
+
+
+CREATE TABLE Quote
+(
+	QuoteID int NOT NULL AUTO_INCREMENT,
+	quote varchar(511),
+	author varchar(255),
+	subject varchar(255),
+	lastUpdate bigint,
+	PRIMARY KEY (QuoteID)
+);
+
+
+CREATE TABLE Roles
+(
+	-- does this user have user rights?
+	-- 
+	-- 0 = false
+	-- 1 = true
+	type varchar(255) COMMENT 'does this user have user rights?
+
+0 = false
+1 = true',
+	userID int NOT NULL,
+	PRIMARY KEY (userID)
+);
+
+
+CREATE TABLE Subscription
+(
+	calendarID int NOT NULL,
+	userID int NOT NULL
+);
+
+
+CREATE TABLE Users
+(
+	userID int NOT NULL AUTO_INCREMENT,
+	userName varchar(8),
+	email varchar(255),
+	password varchar(255),
+	PRIMARY KEY (userID)
+);
+
+
+CREATE TABLE Weather
+(
+
+);
+
+
 
 /* Create Foreign Keys */
 
+ALTER TABLE Events
+	ADD FOREIGN KEY (calendarID)
+	REFERENCES Calendars (calendarID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE AutherRights
+	ADD FOREIGN KEY (calendarID)
+	REFERENCES Calendars (calendarID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
 ALTER TABLE Subscription
+	ADD FOREIGN KEY (calendarID)
+	REFERENCES Calendars (calendarID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE Notes
+	ADD FOREIGN KEY (eventID)
+	REFERENCES Events (eventID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE AutherRights
 	ADD FOREIGN KEY (userID)
 	REFERENCES Users (userID)
 	ON UPDATE RESTRICT
@@ -150,41 +175,9 @@ ALTER TABLE Roles
 ;
 
 
-ALTER TABLE AutherRights
+ALTER TABLE Subscription
 	ADD FOREIGN KEY (userID)
 	REFERENCES Users (userID)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE Events
-	ADD FOREIGN KEY (calendarID)
-	REFERENCES Calendars (calendarID)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE Subscription
-	ADD FOREIGN KEY (calendarID)
-	REFERENCES Calendars (calendarID)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE AutherRights
-	ADD FOREIGN KEY (calendarID)
-	REFERENCES Calendars (calendarID)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE Notes
-	ADD FOREIGN KEY (eventID)
-	REFERENCES Events (eventID)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;

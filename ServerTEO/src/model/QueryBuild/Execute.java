@@ -126,7 +126,7 @@ public class Execute extends Model {
                 e.printStackTrace();
             }
         } else {
-            System.out.println(sql);
+//            System.out.println(sql);
             
             sql = INSERTINTO + getQueryBuilder().getTableName() + " (" + getQueryBuilder().getFields() + ")" + VALUES + "(";
             StringBuilder sb = new StringBuilder();
