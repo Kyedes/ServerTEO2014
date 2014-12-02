@@ -18,6 +18,8 @@ import java.sql.SQLException;
 
 
 
+
+import model.Forecast.Weather;
 import shared.CreateCalendarObject;
 import shared.CreateEventObject;
 import shared.DeleteCalendarObject;
@@ -173,6 +175,8 @@ public class GiantSwitch {
 
 		case "getClientForecast":
 			System.out.println("Recieved getClientForecast");
+			Weather w = new Weather();
+			answer = w.getWeather();
 			break;
 		
 		default:
