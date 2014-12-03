@@ -18,6 +18,7 @@ public class Quotes {
 	private QuoteObject quoteReturn = new QuoteObject();
 	private ResultSet resultSet;
 	private Gson gson = new Gson();
+	private Date date = new Date();
 
 	/**
 	 *
@@ -61,19 +62,20 @@ public class Quotes {
 			String[] fields = {
     				"quote",
     				"author",
-    				"subject"
+    				"topic",
+    				"lastupdate"
     		};
     		String[] values = {
     				quote.getQuote(),
     				quote.getAuthor(),
-    				quote.getSubject()
+    				quote.getTopic(),
+    				String.valueOf(date.getTime())
     		};
     		
     		resultSet = qb.selectFrom("quote").all().ExecuteQuery();
     		
-    		int x = 0;
     		if(resultSet.next()){
-    			qb.update("quote", fields, values).all().Execute();
+    			qb.update("quote", fields, values).where("quoteid", "=", "1").Execute();
     		}else{
     			qb.insertInto("quote", fields).values(values).Execute();
     		}
@@ -86,8 +88,6 @@ public class Quotes {
 	
 	public String getQuote() throws SQLException{
 		
-		Date date = new Date();
-		
 		String answer = "";
 		
 		resultSet = qb.selectFrom("quote").all().ExecuteQuery();
@@ -95,22 +95,24 @@ public class Quotes {
 		if(resultSet.next()){
 			if(resultSet.getLong("lastUpdate")+86400000 < date.getTime()){//if more than a day since last update, then update the quote
 				importQuote();
-				qb.update("quote",new String[] {"lastUpdate"},new String[] {String.format(""+date.getTime())}).all().Execute();
+				qb.update("quote",new String[] {"lastUpdate"},new String[] {String.format(""+date.getTime())}).where("quoteid", "=", "1").Execute();
 			}
 			quoteReturn.setQuote(resultSet.getString("quote"));
 			quoteReturn.setAuthor(resultSet.getString("author"));
-			quoteReturn.setSubject(resultSet.getString("subject"));
+			quoteReturn.setTopic(resultSet.getString("topic"));
 			
 		}else{
 			importQuote();
+			resultSet = qb.selectFrom("quote").all().ExecuteQuery();
+			resultSet.next();
 			quoteReturn.setQuote(resultSet.getString("quote"));
 			quoteReturn.setAuthor(resultSet.getString("author"));
-			quoteReturn.setSubject(resultSet.getString("subject"));
+			quoteReturn.setTopic(resultSet.getString("topic"));
 			
 		}
 //		quoteReturn.setQuote("The quote database is not available right now.");
 //		quoteReturn.setAuthor("Esben Kyed, System Programmer");
-//		quoteReturn.setSubject("Error");
+//		quoteReturn.setTopic("Error");
 		
 		answer = (String) gson.toJson(quoteReturn);
 		

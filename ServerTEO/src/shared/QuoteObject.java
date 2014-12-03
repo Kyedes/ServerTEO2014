@@ -10,7 +10,7 @@ public class QuoteObject {
 
 	private String quote;
 	private String author;
-	private String subject;
+	private String topic;
 	
 	public QuoteObject(){
 		
@@ -20,7 +20,7 @@ public class QuoteObject {
 		super();
 		this.quote = quote;
 		this.author = author;
-		this.subject = subject;
+		this.topic = subject;
 	}
 	public String getQuote() {
 		return quote;
@@ -34,11 +34,11 @@ public class QuoteObject {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public String getSubject() {
-		return subject;
+	public String getTopic() {
+		return topic;
 	}
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setTopic(String subject) {
+		this.topic = subject;
 	}
 	
 	
