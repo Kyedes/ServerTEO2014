@@ -70,6 +70,8 @@ public class Quotes {
     		};
     		
     		resultSet = qb.selectFrom("quote").all().ExecuteQuery();
+    		
+    		int x = 0;
     		if(resultSet.next()){
     			qb.update("quote", fields, values).all().Execute();
     		}else{
@@ -100,10 +102,15 @@ public class Quotes {
 			quoteReturn.setSubject(resultSet.getString("subject"));
 			
 		}else{
-			quoteReturn.setQuote("The quote database is not available right now.");
-			quoteReturn.setAuthor("Esben Kyed, System Programmer");
-			quoteReturn.setSubject("Error");
+			importQuote();
+			quoteReturn.setQuote(resultSet.getString("quote"));
+			quoteReturn.setAuthor(resultSet.getString("author"));
+			quoteReturn.setSubject(resultSet.getString("subject"));
+			
 		}
+//		quoteReturn.setQuote("The quote database is not available right now.");
+//		quoteReturn.setAuthor("Esben Kyed, System Programmer");
+//		quoteReturn.setSubject("Error");
 		
 		answer = (String) gson.toJson(quoteReturn);
 		
