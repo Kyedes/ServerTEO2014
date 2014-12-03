@@ -80,7 +80,7 @@ CREATE TABLE Quote
 	QuoteID int NOT NULL AUTO_INCREMENT,
 	quote varchar(511),
 	author varchar(255),
-	subject varchar(255),
+	topic varchar(255),
 	lastUpdate bigint,
 	PRIMARY KEY (QuoteID)
 );
