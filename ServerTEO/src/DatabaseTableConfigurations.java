@@ -1,6 +1,6 @@
 
 public class DatabaseTableConfigurations {
-	private String calendar = "calendar";
+	private String calendar = "calendars";
 	private String users = "users";
 	private String userEvent = "userEvent";
 	private String notes ="notes";
