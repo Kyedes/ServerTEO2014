@@ -1,8 +1,6 @@
 package model.QueryBuild;
-
 import model.Model;
 import org.apache.commons.lang.StringEscapeUtils;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

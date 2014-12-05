@@ -97,6 +97,8 @@ public class Quotes {
 				importQuote();
 				qb.update("quote",new String[] {"lastUpdate"},new String[] {String.format(""+date.getTime())}).where("quoteid", "=", "1").Execute();
 			}
+			resultSet = qb.selectFrom("quote").all().ExecuteQuery();
+			resultSet.next();
 			quoteReturn.setQuote(resultSet.getString("quote"));
 			quoteReturn.setAuthor(resultSet.getString("author"));
 			quoteReturn.setTopic(resultSet.getString("topic"));
