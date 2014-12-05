@@ -201,8 +201,8 @@ public class GiantSwitch {
 			return "getNote";
 		} else if (ID.contains("deleteNote")){
 			return "deleteNote";
-		}else if  (ID.contains("deletecalendar")){
-			return "deletecalendar";
+		}else if  (ID.contains("deleteCalendar")){
+			return "deleteCalendar";
 		} else if (ID.contains("getClientForecast")) {
 			return "getClientForecast";
 		} else if (ID.contains("saveImportedcalendar")) {
