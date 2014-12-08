@@ -19,7 +19,7 @@ public class DeleteNote {
 	private String answer;
 	
 	public String execute(DeleteNoteObject deleteNoteObject) throws SQLException{
-		resultSet = qb.selectFrom("events").where("eventid", "=", deleteNoteObject.getEventID()).ExecuteQuery();
+		resultSet = qb.selectFrom("events").where("eventname", "=", deleteNoteObject.getEventID()).ExecuteQuery();
 		resultSet.next();
 		String eventid = resultSet.getString("eventid");
 		
