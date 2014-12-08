@@ -23,11 +23,11 @@ public class DeleteNote {
 		resultSet.next();
 		String eventid = resultSet.getString("eventid");
 		
-		resultSet = qb.selectFrom("notes").where("eventID", "=", eventid).ExecuteQuery();
+		resultSet = qb.selectFrom("notes").where("eventid", "=", eventid).ExecuteQuery();
 		if(resultSet.next()){
-			qb.deleteFrom("Notes").where("eventid", "=", eventid).Execute();
+			qb.deleteFrom("notes").where("eventid", "=", eventid).Execute();
 			deleted = true;
-			message = "the note has been deleted";
+			message = "The note has been deleted";
 		}else{
 			deleted = false;
 			message = "The note does not exist";

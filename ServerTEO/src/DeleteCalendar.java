@@ -20,15 +20,6 @@ public class DeleteCalendar extends Model{
 	
 	public String execute(DeleteCalendarObject deleteCalendarObject) throws SQLException{
 		String answer = "";
-
-		String [] valueCalendar = {"calendarID"};
-
-		String [] valueUser = {"userID"};
-
-		String [] valueImport = {"imported"};
-		
-		String[] valuesEvent = {"eventID"};
-
 		resultSet = queryBuilder.selectFrom("Calendars").where("CalendarName", "=", deleteCalendarObject.getCalendarToDelete()).ExecuteQuery();
 		resultSet.next();
 		String calendarID = resultSet.getString("calendarID");
@@ -42,11 +33,13 @@ public class DeleteCalendar extends Model{
 		boolean author = false;
 		boolean imported = true;
 		resultSet = queryBuilder.selectFrom("Calendars").where("calendarID", "=", calendarID).ExecuteQuery();
-		resultSet.next();
-		
-		if(resultSet.getInt("imported") == 0){
-			imported = false;
+		if(resultSet.next()){
+			if(resultSet.getInt("imported") == 0){
+				imported = false;
+			}
 		}
+		
+		
 		
 		
 		if(imported == false){
