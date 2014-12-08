@@ -27,7 +27,7 @@ public class SaveNote{
 			if (resultSet.next()){
 				String userID = resultSet.getString("userid");
 				
-				resultSet = queryBuilder.selectFrom("authorrights").where("calendarID", "=", calendarID).ExecuteQuery();
+				resultSet = queryBuilder.selectFrom("autherrights").where("calendarID", "=", calendarID).ExecuteQuery();
 
 				while(resultSet.next()){
 					if(resultSet.getString("userID").equals(userID)){
