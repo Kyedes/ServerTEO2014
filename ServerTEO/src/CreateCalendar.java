@@ -56,11 +56,16 @@ public class CreateCalendar{
 			
 			for(String n : createCalendarObject.getUsers())//sets initial subscribers for the new calendar
 			{
-				
+				resultSet = queryBuilder.selectFrom("users").where("email", "=", n).ExecuteQuery();
+				resultSet.next();
+				String userID = resultSet.getString("userid");
+				resultSet = queryBuilder.selectFrom("calendars").where("calendarname", "=", newCalendarID).ExecuteQuery();
+				resultSet.next();
+				String calendarID = resultSet.getString("calendarid");
 				String[] keysUser = {"userid", "calendarid"};
 				String[] valuesUser = {
-						queryBuilder.selectFrom("users").where("email", "=", n).ExecuteQuery().getString("userid"),
-						queryBuilder.selectFrom("calendars").where("calendarname", "=", newCalendarID).ExecuteQuery().getString("calendarid")
+						userID,
+						calendarID
 				};
 				queryBuilder.insertInto("Subsciption", keysUser).values(valuesUser).Execute();
 			}
@@ -69,14 +74,14 @@ public class CreateCalendar{
 			{
 				resultSet = queryBuilder.selectFrom("users").where("email", "=", n).ExecuteQuery();
 				resultSet.next();
-				String author = resultSet.getString("username");
+				String authorID = resultSet.getString("userid");
 				resultSet = queryBuilder.selectFrom("calendars").where("calendarname", "=", newCalendarID).ExecuteQuery();
 				resultSet.next();
-				String calendar = resultSet.getString("username");
+				String calendarID = resultSet.getString("calendarid");
 				String[] keysAuthor = {"userid", "calendarid"};
 				String[] valuesAuthor = {
-						author,
-						calendar
+						authorID,
+						calendarID
 				};
 				queryBuilder.insertInto("Subsciption", keysAuthor).values(valuesAuthor).Execute();
 			}
