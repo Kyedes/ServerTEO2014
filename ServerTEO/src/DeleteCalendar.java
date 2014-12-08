@@ -29,24 +29,28 @@ public class DeleteCalendar extends Model{
 		
 		String[] valuesEvent = {"eventID"};
 
-		resultSet = queryBuilder.selectFrom(valueCalendar, "Calendars").where("CalendarName", "=", deleteCalendarObject.getCalendarToDelete()).ExecuteQuery();
+		resultSet = queryBuilder.selectFrom("Calendars").where("CalendarName", "=", deleteCalendarObject.getCalendarToDelete()).ExecuteQuery();
 		resultSet.next();
-		String calendarID = resultSet.toString();
+		String calendarID = resultSet.getString("calendarID");
 		
 		//TODO Strings here but integer in database?
 		
-		resultSet = queryBuilder.selectFrom(valueUser, "Users").where("UserName", "=", deleteCalendarObject.getuserID()).ExecuteQuery();
+		resultSet = queryBuilder.selectFrom("Users").where("UserName", "=", deleteCalendarObject.getuserID()).ExecuteQuery();
 		resultSet.next();
 		int userID = resultSet.getInt("userID");
 				
 		boolean author = false;
-
-		resultSet = queryBuilder.selectFrom(valueImport, "Calendars").where("calendarID", "=", calendarID).ExecuteQuery();
+		boolean imported = true;
+		resultSet = queryBuilder.selectFrom("Calendars").where("calendarID", "=", calendarID).ExecuteQuery();
 		resultSet.next();
-		boolean imported = resultSet.getBoolean("imported");
+		
+		if(resultSet.getInt("imported") == 0){
+			imported = false;
+		}
+		
 		
 		if(imported == false){
-			resultSet = queryBuilder.selectFrom(valueUser, "AutherRights").where("CalendarID", "=", calendarID).ExecuteQuery();
+			resultSet = queryBuilder.selectFrom("AutherRights").where("CalendarID", "=", calendarID).ExecuteQuery();
 
 			while(resultSet.next()){
 
@@ -58,18 +62,21 @@ public class DeleteCalendar extends Model{
 
 			if(author){
 				
-				resultSet = queryBuilder.selectFrom(valuesEvent, "Events").where("CalendarID", "=", calendarID).ExecuteQuery();
+				resultSet = queryBuilder.selectFrom("Events").where("CalendarID", "=", calendarID).ExecuteQuery();
 				while(resultSet.next()){
 					String eventID = resultSet.getString("eventID");
+					try{
 					queryBuilder.deleteFrom("Notes").where("eventID", "=", eventID);
+					}catch(Exception e){
+						System.err.print(e.getStackTrace());
+					}
 				}
 				
 				queryBuilder.deleteFrom(dbConfig.getEvents()).where("CalendarID", "=", calendarID);
 				queryBuilder.deleteFrom(dbConfig.getCalendar()).where("CalendarID", "=", calendarID);
 				queryBuilder.deleteFrom("subscription").where("CalendarID", "=", calendarID);
 				queryBuilder.deleteFrom("autherrights").where("CalendarID", "=", calendarID);
-				
-				
+								
 				answer = String.format("Calendar " + deleteCalendarObject.getCalendarToDelete() + "has been deleted, along with all associated events and notes.");
 
 			}else{
