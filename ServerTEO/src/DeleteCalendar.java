@@ -72,12 +72,12 @@ public class DeleteCalendar extends Model{
 					}
 				}
 				
-				queryBuilder.deleteFrom(dbConfig.getEvents()).where("CalendarID", "=", calendarID);
-				queryBuilder.deleteFrom(dbConfig.getCalendar()).where("CalendarID", "=", calendarID);
-				queryBuilder.deleteFrom("subscription").where("CalendarID", "=", calendarID);
-				queryBuilder.deleteFrom("autherrights").where("CalendarID", "=", calendarID);
+				queryBuilder.deleteFrom(dbConfig.getEvents()).where("CalendarID", "=", calendarID).Execute();
+				queryBuilder.deleteFrom(dbConfig.getCalendar()).where("CalendarID", "=", calendarID).Execute();
+				queryBuilder.deleteFrom("subscription").where("CalendarID", "=", calendarID).Execute();
+				queryBuilder.deleteFrom("autherrights").where("CalendarID", "=", calendarID).Execute();
 								
-				answer = String.format("Calendar " + deleteCalendarObject.getCalendarToDelete() + "has been deleted, along with all associated events and notes.");
+				answer = String.format("Calendar " + deleteCalendarObject.getCalendarToDelete() + " has been deleted, along with all associated events and notes.");
 
 			}else{
 				answer = "You do not have the rights to delete this calendar.";
