@@ -29,18 +29,24 @@ public class DeleteCalendar extends Model{
 		
 		String[] valuesEvent = {"eventID"};
 
-		String calendarID = queryBuilder.selectFrom(valueCalendar, "Calendar").where("CalendarName", "=", deleteCalendarObject.getCalendarToDelete()).ExecuteQuery().toString();
-
+		resultSet = queryBuilder.selectFrom(valueCalendar, "Calendars").where("CalendarName", "=", deleteCalendarObject.getCalendarToDelete()).ExecuteQuery();
+		resultSet.next();
+		String calendarID = resultSet.toString();
+		
 		//TODO Strings here but integer in database?
 		
-		int userID = queryBuilder.selectFrom(valueUser, "Users").where("UserName", "=", deleteCalendarObject.getuserID()).ExecuteQuery().getInt("userID");
-		
+		resultSet = queryBuilder.selectFrom(valueUser, "Users").where("UserName", "=", deleteCalendarObject.getuserID()).ExecuteQuery();
+		resultSet.next();
+		int userID = resultSet.getInt("userID");
+				
 		boolean author = false;
 
-		boolean imported = queryBuilder.selectFrom(valueImport, "Calendar").where("calendarID", "=", calendarID).ExecuteQuery().getBoolean("imported");
-
+		resultSet = queryBuilder.selectFrom(valueImport, "Calendars").where("calendarID", "=", calendarID).ExecuteQuery();
+		resultSet.next();
+		boolean imported = resultSet.getBoolean("imported");
+		
 		if(imported == false){
-			resultSet = queryBuilder.selectFrom(valueUser, "AutherCalendar").where("CalendarID", "=", calendarID).ExecuteQuery();
+			resultSet = queryBuilder.selectFrom(valueUser, "AutherRights").where("CalendarID", "=", calendarID).ExecuteQuery();
 
 			while(resultSet.next()){
 
