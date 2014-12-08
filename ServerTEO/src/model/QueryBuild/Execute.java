@@ -15,6 +15,7 @@ public class Execute extends Model {
     private final String INSERTINTO = "INSERT INTO ";
     private final String UPDATE = "UPDATE ";
     private final String VALUES = " VALUES ";
+    private final String DELETE = "DELETE";
 
     private QueryBuilder queryBuilder;
     private Where where;
@@ -97,9 +98,9 @@ public class Execute extends Model {
      */
     public boolean Execute() throws SQLException {
         String sql = "";
-
+//       UPDATE SET active = 0
         if (getQueryBuilder().isSoftDelete()) {
-            sql = UPDATE + getQueryBuilder().getTableName() + " SET active = 0" +
+            sql = DELETE + getQueryBuilder().getTableName() + " " +
                     WHERE + getWhere().getWhereKey() + " " + getWhere().getWhereOperator() + " " + getWhere().getWhereValue() + ";  ";
             try {
                 getConnection(false);

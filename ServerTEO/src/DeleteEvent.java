@@ -12,7 +12,7 @@ import model.QueryBuild.QueryBuilder;
 public class DeleteEvent extends Model{
 	private DatabaseTableConfigurations dbConfig = new DatabaseTableConfigurations();
 	private QueryBuilder queryBuilder = new QueryBuilder();
-	private boolean auther;
+	private boolean author;
 	private String answer = "";
 	private String message;
 	private boolean deleted = false;
@@ -31,15 +31,15 @@ public class DeleteEvent extends Model{
 
 		resultSet = queryBuilder.selectFrom("autherrights").where("calendarID", "=", calendarID).ExecuteQuery();
 
-		auther = false;
+		author = false;
 
 		while(resultSet.next()){
 			if(resultSet.getString("userID").equals(userID)){
-				auther = true;
+				author = true;
 			}
 		}
 
-		if (auther){
+		if (author){
 			resultSet = queryBuilder.selectFrom(dbConfig.getEvents()).where("eventName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery();
 
 			if(resultSet.next()){
