@@ -46,8 +46,6 @@ public class CreateCalendar{
 					createCalendarObject.getPrivatePublic()
 					};
 			
-			
-			
 			queryBuilder.insertInto(dbConfig.getCalendar(), keys).values(values).Execute();
 			
 			resultSet = queryBuilder.selectFrom("calendars").where("calendarname", "=", createCalendarObject.getCalendarName()).ExecuteQuery();
@@ -56,7 +54,7 @@ public class CreateCalendar{
 			
 			for(String n : createCalendarObject.getUsers())//sets initial subscribers for the new calendar
 			{
-				resultSet = queryBuilder.selectFrom("users").where("email", "=", n).ExecuteQuery();
+				resultSet = queryBuilder.selectFrom("users").where("username", "=", n).ExecuteQuery();
 				resultSet.next();
 				String userID = resultSet.getString("userid");
 				String[] keysUser = {"userid", "calendarid"};
@@ -69,7 +67,7 @@ public class CreateCalendar{
 			
 			for(String n : createCalendarObject.getAuthors())//sets initial authors for the new calendar
 			{
-				resultSet = queryBuilder.selectFrom("users").where("email", "=", n).ExecuteQuery();
+				resultSet = queryBuilder.selectFrom("users").where("username", "=", n).ExecuteQuery();
 				resultSet.next();
 				String authorID = resultSet.getString("userid");
 				String[] keysAuthor = {"userid", "calendarid"};
