@@ -21,7 +21,7 @@ public class DeleteEvent extends Model{
 
 	public String execute(DeleteEventObject deleteEventObject) throws SQLException{
 		
-		String[] valuesCalendar = {"calnedarID"};
+		String[] valuesCalendar = {"calendarID"};
 		String[] valuesUser = {"userID"};
 
 		String calendarID = queryBuilder.selectFrom(valuesCalendar, "Events").where("evntName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery().toString();
