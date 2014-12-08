@@ -59,13 +59,10 @@ public class CreateCalendar{
 				resultSet = queryBuilder.selectFrom("users").where("email", "=", n).ExecuteQuery();
 				resultSet.next();
 				String userID = resultSet.getString("userid");
-				resultSet = queryBuilder.selectFrom("calendars").where("calendarname", "=", newCalendarID).ExecuteQuery();
-				resultSet.next();
-				String calendarID = resultSet.getString("calendarid");
 				String[] keysUser = {"userid", "calendarid"};
 				String[] valuesUser = {
 						userID,
-						calendarID
+						newCalendarID
 				};
 				queryBuilder.insertInto("Subsciption", keysUser).values(valuesUser).Execute();
 			}
@@ -75,13 +72,10 @@ public class CreateCalendar{
 				resultSet = queryBuilder.selectFrom("users").where("email", "=", n).ExecuteQuery();
 				resultSet.next();
 				String authorID = resultSet.getString("userid");
-				resultSet = queryBuilder.selectFrom("calendars").where("calendarname", "=", newCalendarID).ExecuteQuery();
-				resultSet.next();
-				String calendarID = resultSet.getString("calendarid");
 				String[] keysAuthor = {"userid", "calendarid"};
 				String[] valuesAuthor = {
 						authorID,
-						calendarID
+						newCalendarID
 				};
 				queryBuilder.insertInto("Subsciption", keysAuthor).values(valuesAuthor).Execute();
 			}
