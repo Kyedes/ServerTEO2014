@@ -25,7 +25,7 @@ public class DeleteCalendar extends Model{
 
 		String [] valueUser = {"userID"};
 
-		String [] valueImport = {"import"};
+		String [] valueImport = {"imported"};
 		
 		String[] valuesEvent = {"eventID"};
 
