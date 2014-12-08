@@ -62,7 +62,7 @@ public class CreateCalendar{
 						userID,
 						newCalendarID
 				};
-				queryBuilder.insertInto("Subsciption", keysUser).values(valuesUser).Execute();
+				queryBuilder.insertInto("Subscription", keysUser).values(valuesUser).Execute();
 			}
 			
 			for(String n : createCalendarObject.getAuthors())//sets initial authors for the new calendar
@@ -75,7 +75,7 @@ public class CreateCalendar{
 						authorID,
 						newCalendarID
 				};
-				queryBuilder.insertInto("Subsciption", keysAuthor).values(valuesAuthor).Execute();
+				queryBuilder.insertInto("AutherRights", keysAuthor).values(valuesAuthor).Execute();
 			}
 			created = true;
 			message = "Calendar successfully created";
