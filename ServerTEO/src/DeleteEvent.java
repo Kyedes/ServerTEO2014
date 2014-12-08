@@ -24,7 +24,7 @@ public class DeleteEvent extends Model{
 		String[] valuesCalendar = {"calendarID"};
 		String[] valuesUser = {"userID"};
 
-		String calendarID = queryBuilder.selectFrom(valuesCalendar, "Events").where("evntName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery().toString();
+		String calendarID = queryBuilder.selectFrom(valuesCalendar, "Events").where("eventName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery().toString();
 
 		String userID = queryBuilder.selectFrom(valuesUser, "Users").where("email", "=", deleteEventObject.getuserID()).ExecuteQuery().getString("userID");
 
