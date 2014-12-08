@@ -21,12 +21,10 @@ public class DeleteEvent extends Model{
 
 	public String execute(DeleteEventObject deleteEventObject) throws SQLException{
 
-		resultSet = queryBuilder.selectFrom(dbConfig.getEvents()).where("eventName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery();
+		resultSet = queryBuilder.selectFrom("events").where("eventName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery();
 
 		if(resultSet.next()){
 
-			resultSet = queryBuilder.selectFrom("Events").where("eventName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery();
-			resultSet.next();
 			String calendarID = resultSet.getString("calendarid");
 
 			resultSet = queryBuilder.selectFrom("Users").where("username", "=", deleteEventObject.getuserID()).ExecuteQuery();
@@ -49,13 +47,13 @@ public class DeleteEvent extends Model{
 
 				resultSet = queryBuilder.selectFrom("Events").where("eventName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery();
 				resultSet.next();
-				String eventID = resultSet.toString();
+				String eventID = resultSet.getString("eventid");
 				try{
 					queryBuilder.deleteFrom("Notes").where("eventID", "=", eventID).Execute();
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-				queryBuilder.deleteFrom(dbConfig.getEvents()).where("eventName", "=", deleteEventObject.getEventToDelete()).Execute();
+				queryBuilder.deleteFrom("events").where("eventid", "=", eventID).Execute();
 
 				message = String.format("Event " + deleteEventObject.getEventToDelete() + " has been deleted, with associated note.");
 				deleted = true;
