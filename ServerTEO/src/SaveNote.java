@@ -17,16 +17,13 @@ public class SaveNote{
 	public String execute(SaveNoteObject saveNoteObject) throws SQLException{
 		String answer = "";
 
-		String [] valueCalendar = {"calendarID"};
-		String [] valueEvent = {"eventID"};
-		String [] valueUser = {"userID"};
 		boolean author = false;
 
-		resultSet = queryBuilder.selectFrom(valueCalendar, "Events").where("eventName", "=", saveNoteObject.getEventName()).ExecuteQuery();
+		resultSet = queryBuilder.selectFrom("Events").where("eventName", "=", saveNoteObject.getEventName()).ExecuteQuery();
 		if(resultSet.next()){
 			String calendarID = resultSet.getString("calendarid");
 			
-			resultSet = queryBuilder.selectFrom(valueUser, "Users").where("email", "=", saveNoteObject.getUserEmail()).ExecuteQuery();
+			resultSet = queryBuilder.selectFrom("Users").where("username", "=", saveNoteObject.getUserEmail()).ExecuteQuery();
 			if (resultSet.next()){
 				String userID = resultSet.getString("userid");
 				
@@ -38,13 +35,15 @@ public class SaveNote{
 					}
 				}
 				if (author){
-					String eventID = queryBuilder.selectFrom(valueEvent, "Events").where("eventName", "=", saveNoteObject.getEventName()).ExecuteQuery().getString("eventID");
+					resultSet = queryBuilder.selectFrom("Events").where("eventName", "=", saveNoteObject.getEventName()).ExecuteQuery();
+					resultSet.next();
+					String eventID = resultSet.getString("eventID");
 					
 					resultSet = queryBuilder.selectFrom("Notes").where("eventID", "=", eventID).ExecuteQuery();
 					
 					if(resultSet.next()){
 						queryBuilder.update("notes", new String [] {"notecontent"}, new String [] {saveNoteObject.getNoteContent()}).where("eventid", "=", eventID).Execute();
-						snro.setMessage("note updated");
+						snro.setMessage("Note updated");
 						snro.setUpdated(true);
 					}else{
 						queryBuilder.insertInto("notes", new String [] {"notecontent"}).values( new String [] {saveNoteObject.getNoteContent()}).Execute();
