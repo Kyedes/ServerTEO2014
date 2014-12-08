@@ -16,7 +16,6 @@ public class CreateEventObject implements java.io.Serializable
 	private String eventName;
 	private String description;
 	private String location;
-	private String createdby;
 	private String calendarName;
 	private String startDate;
 	private String startTime;
@@ -52,12 +51,6 @@ public class CreateEventObject implements java.io.Serializable
 	}
 	public void setLocation(String location) {
 		this.location = location;
-	}
-	public String getCreatedby() {
-		return createdby;
-	}
-	public void setCreatedby(String createdby) {
-		this.createdby = createdby;
 	}
 	public String getCalendarName() {
 		return calendarName;

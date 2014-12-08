@@ -32,34 +32,32 @@ public class CreateEvent {
 		
 		resultSet = qb.selectFrom(new String [] {"calendarname"},"calendars").where("calendarname", "=", ceo.getCalendarName()).ExecuteQuery();
 		
-		String[] fields = {
-				"eventName", 
-				"description", 
-				"location", 
-				"createdBy", 
-				"calendarname", 
-				"startDate", 
-				"startTime", 
-				"endDate", 
-				"endTime", 
-		};
 		
-		String[] values = {
-				ceo.getEventName(),
-				ceo.getDescription(),
-				ceo.getLocation(), 
-				ceo.getCreatedby(), 
-				ceo.getCalendarName(), 
-				ceo.getStartDate(),
-				ceo.getStartTime(), 
-				ceo.getEndDate(),
-				ceo.getEndTime()
-		};
 		
 		if (resultSet.next()){
+			String calendarID = resultSet.getString("calendarid");
+			
+			String[] fields = {
+					"calendarid",
+					"type", 
+					"eventname", 
+					"description", 
+					"start", 
+					"end", 
+					"location",
+			};
+			
+			String[] values = {
+					calendarID,
+					ceo.getType(),
+					ceo.getEventName(),
+					ceo.getDescription(), 
+					String.format("%s %s", ceo.getStartDate(),ceo.getStartTime()),
+					String.format("%s %s", ceo.getEndDate(),ceo.getEndTime()),
+					ceo.getLocation()
+			};
 			
 			qb.insertInto("events", fields).values(values).Execute();//use the boolean???
-			
 			cero.setCreated(true);
 			cero.setMessage("the event " + ceo.getEventName() + " has been created" );
 			
