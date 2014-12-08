@@ -20,15 +20,16 @@ public class DeleteEvent extends Model{
 	private DeleteEventReturnObject dero = new DeleteEventReturnObject();
 
 	public String execute(DeleteEventObject deleteEventObject) throws SQLException{
+
+		resultSet = queryBuilder.selectFrom("Events").where("eventName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery();
+		resultSet.next();
+		String calendarID = resultSet.getString("calendarid");
 		
-		String[] valuesCalendar = {"calendarID"};
-		String[] valuesUser = {"userID"};
-
-		String calendarID = queryBuilder.selectFrom(valuesCalendar, "Events").where("eventName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery().toString();
-
-		String userID = queryBuilder.selectFrom(valuesUser, "Users").where("email", "=", deleteEventObject.getuserID()).ExecuteQuery().getString("userID");
-
-
+		resultSet = queryBuilder.selectFrom("Users").where("email", "=", deleteEventObject.getuserID()).ExecuteQuery();
+		resultSet.next();
+		String userID = resultSet.getString("userID");
+				
+				
 		resultSet = queryBuilder.selectFrom("autherrights").where("calendarID", "=", calendarID).ExecuteQuery();
 
 		author = false;
@@ -43,13 +44,18 @@ public class DeleteEvent extends Model{
 			resultSet = queryBuilder.selectFrom(dbConfig.getEvents()).where("eventName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery();
 
 			if(resultSet.next()){
-
-				queryBuilder.deleteFrom(dbConfig.getEvents()).where("eventName", "=", deleteEventObject.getEventToDelete());
-				String[] valuesEvent = {"eventID"};
-				String eventID = queryBuilder.selectFrom(valuesEvent, "Events").where("eventName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery().toString();
+				
+				resultSet = queryBuilder.selectFrom("Events").where("eventName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery();
+				resultSet.next();
+				String eventID = resultSet.toString();
+				
 				queryBuilder.deleteFrom("Notes").where("eventID", "=", eventID);
-				message = String.format("Event " + deleteEventObject.getEventToDelete() + "has been deleted, with associated note.");
+								
+				queryBuilder.deleteFrom(dbConfig.getEvents()).where("eventName", "=", deleteEventObject.getEventToDelete());
+				
+				message = String.format("Event " + deleteEventObject.getEventToDelete() + " has been deleted, with associated note.");
 				deleted = true;
+				
 			}else{
 				deleted = false;
 				message = "event does not exist";
