@@ -3,6 +3,7 @@ import java.net.*;
 class TCPServer{    
 	
 	public static void main(String argv[]) throws Exception       {
+		StartGUI g = new StartGUI();
 		boolean running = true;
 //		AdminWorker admin = new AdminWorker();
 //		Thread adminThread = new Thread(admin, "Admin");
