@@ -50,7 +50,9 @@ public class CreateCalendar{
 			
 			queryBuilder.insertInto(dbConfig.getCalendar(), keys).values(values).Execute();
 			
-			String newCalendarID = queryBuilder.selectFrom("calendars").where("calendarname", "=", createCalendarObject.getCalendarName()).ExecuteQuery().getString("calendarid");
+			resultSet = queryBuilder.selectFrom("calendars").where("calendarname", "=", createCalendarObject.getCalendarName()).ExecuteQuery();
+			resultSet.next();
+			String newCalendarID = resultSet.getString("calendarid");
 			
 			for(String n : createCalendarObject.getUsers())//sets initial subscribers for the new calendar
 			{
@@ -65,11 +67,16 @@ public class CreateCalendar{
 			
 			for(String n : createCalendarObject.getAuthors())//sets initial authors for the new calendar
 			{
-				
+				resultSet = queryBuilder.selectFrom("users").where("email", "=", n).ExecuteQuery();
+				resultSet.next();
+				String author = resultSet.getString("username");
+				resultSet = queryBuilder.selectFrom("calendars").where("calendarname", "=", newCalendarID).ExecuteQuery();
+				resultSet.next();
+				String calendar = resultSet.getString("username");
 				String[] keysAuthor = {"userid", "calendarid"};
 				String[] valuesAuthor = {
-						queryBuilder.selectFrom("users").where("email", "=", n).ExecuteQuery().getString("userid"),
-						queryBuilder.selectFrom("calendars").where("calendarname", "=", newCalendarID).ExecuteQuery().getString("calendarid")
+						author,
+						calendar
 				};
 				queryBuilder.insertInto("Subsciption", keysAuthor).values(valuesAuthor).Execute();
 			}
