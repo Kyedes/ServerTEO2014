@@ -12,6 +12,7 @@ public class CreateEventObject implements java.io.Serializable
 {
 	private static final long serialVersionUID = 603624733895783558L;
 	private String overallID = "createEvent";
+	private String author;	
 	private String type;
 	private String eventName;
 	private String description;
@@ -22,6 +23,12 @@ public class CreateEventObject implements java.io.Serializable
 	private String endDate;
 	private String endTime;
 	
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 	public String getOverallID() {
 		return overallID;
 	}
