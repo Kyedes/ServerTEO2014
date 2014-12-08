@@ -15,7 +15,7 @@ public class Execute extends Model {
     private final String INSERTINTO = "INSERT INTO ";
     private final String UPDATE = "UPDATE ";
     private final String VALUES = " VALUES ";
-    private final String DELETE = "DELETE";
+    private final String DELETE = "DELETE ";
 
     private QueryBuilder queryBuilder;
     private Where where;
