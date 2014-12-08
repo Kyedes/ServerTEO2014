@@ -51,9 +51,9 @@ public class DeleteEvent extends Model{
 				resultSet.next();
 				String eventID = resultSet.toString();
 
-				queryBuilder.deleteFrom("Notes").where("eventID", "=", eventID);
+				queryBuilder.deleteFrom("Notes").where("eventID", "=", eventID).Execute();
 
-				queryBuilder.deleteFrom(dbConfig.getEvents()).where("eventName", "=", deleteEventObject.getEventToDelete());
+				queryBuilder.deleteFrom(dbConfig.getEvents()).where("eventName", "=", deleteEventObject.getEventToDelete()).Execute();
 
 				message = String.format("Event " + deleteEventObject.getEventToDelete() + " has been deleted, with associated note.");
 				deleted = true;
