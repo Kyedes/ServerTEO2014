@@ -17,7 +17,7 @@ import model.QueryBuild.QueryBuilder;
 public class CreateEvent {
 	private QueryBuilder qb = new QueryBuilder();
 	private ResultSet resultSet;
-	private CreateEventReturnObject cero;
+	private CreateEventReturnObject cero = new CreateEventReturnObject();
 	private Gson gson = new Gson();
 
 	/**
@@ -66,7 +66,7 @@ public class CreateEvent {
 			cero.setMessage("The associated calendar does not exist");
 		}
 		
-		answer = (String) gson.toJson(cero);
+		answer = gson.toJson(cero);
 		
 		return answer;
 	}
