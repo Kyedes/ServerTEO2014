@@ -46,7 +46,7 @@ public class SaveNote{
 						snro.setMessage("Note updated");
 						snro.setUpdated(true);
 					}else{
-						queryBuilder.insertInto("notes", new String [] {"notecontent"}).values( new String [] {saveNoteObject.getNoteContent()}).Execute();
+						queryBuilder.insertInto("notes", new String [] {"notecontent", "eventid"}).values( new String [] {saveNoteObject.getNoteContent(), eventID}).Execute();
 						snro.setMessage("Note updated");
 						snro.setUpdated(true);
 					}
