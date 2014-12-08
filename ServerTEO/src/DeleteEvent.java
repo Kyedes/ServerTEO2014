@@ -43,8 +43,6 @@ public class DeleteEvent extends Model{
 			}
 
 			if (author){
-
-
 				resultSet = queryBuilder.selectFrom("Events").where("eventName", "=", deleteEventObject.getEventToDelete()).ExecuteQuery();
 				resultSet.next();
 				String eventID = resultSet.getString("eventid");

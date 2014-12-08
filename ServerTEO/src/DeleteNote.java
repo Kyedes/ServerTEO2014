@@ -17,10 +17,15 @@ public class DeleteNote {
 	private DeleteNoteReturnObject dnrt = new DeleteNoteReturnObject();
 	private ResultSet resultSet;
 	private String answer;
+	
 	public String execute(DeleteNoteObject deleteNoteObject) throws SQLException{
-		resultSet = qb.selectFrom("notes").where("eventID", "=", deleteNoteObject.getEventID()).ExecuteQuery();
+		resultSet = qb.selectFrom("events").where("eventid", "=", deleteNoteObject.getEventID()).ExecuteQuery();
+		resultSet.next();
+		String eventid = resultSet.getString("eventid");
+		
+		resultSet = qb.selectFrom("notes").where("eventID", "=", eventid).ExecuteQuery();
 		if(resultSet.next()){
-			qb.deleteFrom("Notes").where("eventid", "=", deleteNoteObject.getEventID()).Execute();
+			qb.deleteFrom("Notes").where("eventid", "=", eventid).Execute();
 			deleted = true;
 			message = "the note has been deleted";
 		}else{

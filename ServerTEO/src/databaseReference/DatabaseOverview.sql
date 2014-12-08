@@ -183,4 +183,4 @@ ALTER TABLE Subscription
 ;
 
 
-
+set global max_connections = 1000;
