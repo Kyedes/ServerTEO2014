@@ -73,9 +73,9 @@ public class DeleteCalendar extends Model{
 				}
 				
 				queryBuilder.deleteFrom(dbConfig.getEvents()).where("CalendarID", "=", calendarID).Execute();
-				queryBuilder.deleteFrom(dbConfig.getCalendar()).where("CalendarID", "=", calendarID).Execute();
 				queryBuilder.deleteFrom("subscription").where("CalendarID", "=", calendarID).Execute();
 				queryBuilder.deleteFrom("autherrights").where("CalendarID", "=", calendarID).Execute();
+				queryBuilder.deleteFrom(dbConfig.getCalendar()).where("CalendarID", "=", calendarID).Execute();
 								
 				answer = String.format("Calendar " + deleteCalendarObject.getCalendarToDelete() + " has been deleted, along with all associated events and notes.");
 
