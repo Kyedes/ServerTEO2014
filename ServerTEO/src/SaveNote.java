@@ -27,7 +27,7 @@ public class SaveNote{
 			if (resultSet.next()){
 				String userID = resultSet.getString("userid");
 				
-				resultSet = queryBuilder.selectFrom("Author").where("calendarID", "=", calendarID).ExecuteQuery();
+				resultSet = queryBuilder.selectFrom("authorrights").where("calendarID", "=", calendarID).ExecuteQuery();
 
 				while(resultSet.next()){
 					if(resultSet.getString("userID").equals(userID)){
@@ -47,6 +47,8 @@ public class SaveNote{
 						snro.setUpdated(true);
 					}else{
 						queryBuilder.insertInto("notes", new String [] {"notecontent"}).values( new String [] {saveNoteObject.getNoteContent()}).Execute();
+						snro.setMessage("Note updated");
+						snro.setUpdated(true);
 					}
 				}else{
 					snro.setUpdated(false);
