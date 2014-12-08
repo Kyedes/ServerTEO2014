@@ -30,7 +30,7 @@ public class CreateEvent {
 	public String execute(CreateEventObject ceo) throws SQLException{
 		String answer = "";
 		
-		resultSet = qb.selectFrom(new String [] {"calendarname"},"calendars").where("calendarname", "=", ceo.getCalendarName()).ExecuteQuery();
+		resultSet = qb.selectFrom("calendars").where("calendarname", "=", ceo.getCalendarName()).ExecuteQuery();
 		
 		
 		
