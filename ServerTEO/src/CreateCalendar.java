@@ -109,7 +109,7 @@ public class CreateCalendar{
 	{
 		boolean doesExist = false;
 		
-		resultSet = queryBuilder.selectFrom(dbConfig.getCalendar()).where("name", "=", newCalenderName).ExecuteQuery();
+		resultSet = queryBuilder.selectFrom(dbConfig.getCalendar()).where("calendarname", "=", newCalenderName).ExecuteQuery();
 				
 		if(resultSet.next())
 		{
